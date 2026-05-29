@@ -10,7 +10,7 @@ export default function AppRoutes() {
       <Route element={<Dashboard />}>
         <Route path="/" element={<Users />} />
         <Route path="/places" element={<Places />} />
-        <Route path="/places/new" element={<AddPlace />} />
+        <Route path="/add-place" element={<AddPlace />} />
       </Route>
     </Routes>
   );
