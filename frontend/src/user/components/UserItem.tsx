@@ -38,7 +38,7 @@ export default function UserItem({ user }: Props) {
       />
 
       <img
-        src={`src/assets/${user.image}`}
+        src={`${user.image}`}
         alt={user.name}
         className="h-32 w-32 rounded-full object-cover relative z-10"
       />
