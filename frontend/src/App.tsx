@@ -1,6 +1,6 @@
 import Sidebar from "./components/Siderbar";
+import Dashboard from "./layout/Dashboard";
 import Header from "./layout/Header";
-// import Users from "./user/pages/Users";
 
 function App() {
   return (
@@ -8,6 +8,7 @@ function App() {
       <Header />
       <div className="flex">
         <Sidebar />
+        <Dashboard />
       </div>
     </div>
   );
