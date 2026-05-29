@@ -1,5 +1,5 @@
-import { allUsers } from "../../data/all-data";
-import UserList from "../components/UserList";
+import { allUsers } from "../data/all-data";
+import UserList from "../user/components/UserList";
 
 export default function Users() {
   return (
