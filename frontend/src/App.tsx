@@ -1,14 +1,16 @@
-import Header from "./layout/Header"
+import Sidebar from "./components/Siderbar";
+import Header from "./layout/Header";
+// import Users from "./user/pages/Users";
 
 function App() {
   return (
     <div className="min-h-screen bg-[#111827]">
       <Header />
-      {/* <h1 className="text-5xl font-bold text-violet-400">
-        YourPlaces
-      </h1> */}
+      <div className="flex">
+        <Sidebar />
+      </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
