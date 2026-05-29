@@ -7,7 +7,7 @@ import {
 
 export default function Sidebar() {
   return (
-    <aside className="flex h-screen w-72 flex-col border-r border-slate-800 bg-slate-950">
+    <aside className="flex h-screen flex-1/7 flex-col border-r border-slate-800 bg-slate-950">
       
 
       <nav className="flex flex-1 flex-col gap-2 p-4">

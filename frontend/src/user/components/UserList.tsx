@@ -1,14 +1,16 @@
-import type { User } from "../../types"
-import UserItem from "./UserItem"
+import type { User } from "../../types";
+import UserItem from "./UserItem";
 
 interface Props {
-    users: User[]
+  users: User[];
 }
 
-export default function UserList({users}: Props) {
+export default function UserList({ users }: Props) {
   return (
-    <div className="flex gap-5 flex-wrap">
-      {users.map((user: User) => <UserItem key={user.id} user={user} />)}
+    <div className="flex flex-wrap gap-8">
+      {users.map((user: User) => (
+        <UserItem key={user.id} user={user} />
+      ))}
     </div>
-  )
+  );
 }
