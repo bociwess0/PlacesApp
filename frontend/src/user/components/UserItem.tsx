@@ -11,7 +11,8 @@ export default function UserItem({ user }: Props) {
       className="
     group
     flex flex-col items-center
-    flex-[1/5] min-w-70 max-w-[320px]
+    flex-[100%]
+    md:flex-[1/5]  min-w-70 md:max-w-[320px]
     rounded-3xl
     border border-slate-800
     bg-slate-950/40

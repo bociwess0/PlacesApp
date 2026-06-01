@@ -5,11 +5,11 @@ export default function Users() {
   return (
     <section>
       <div className="mb-10">
-        <h1 className="text-4xl font-bold text-white mb-3">
+        <h1 className="text-2xl md:text-4xl font-bold text-white mb-3">
           All Users
         </h1>
 
-        <p className="text-lg text-white">
+        <p className=" md:text-lg text-white">
           Browse and explore places created by our community.
         </p>
       </div>
