@@ -13,6 +13,21 @@ export default function Dashboard() {
         setIsSidebarOpen={setIsSidebarOpen}
       />
 
+      {isSidebarOpen && (
+        <div
+          className="
+            fixed
+            inset-0
+            top-20
+            z-40
+            bg-black/50
+            backdrop-blur-sm
+            lg:hidden
+          "
+          onClick={() => setIsSidebarOpen(false)}
+        ></div>
+      )}
+
       <div className="flex h-[calc(100vh-80px)]">
         <Sidebar
           isSidebarOpen={isSidebarOpen}

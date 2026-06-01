@@ -4,10 +4,10 @@ import { NavLink } from "react-router-dom";
 
 interface Props {
   isSidebarOpen: boolean;
-  setIsSidebarOpen?: Dispatch<SetStateAction<boolean>>;
+  setIsSidebarOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-export default function Sidebar({ isSidebarOpen}: Props) {
+export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }: Props) {
   return (
     <div
       className={`
@@ -19,7 +19,8 @@ export default function Sidebar({ isSidebarOpen}: Props) {
         flex
         flex-col
 
-        h-[calc(100vh-80px)]
+        h-[calc(100vh-120px)]
+        md:h-[calc(100vh-80px)]
         w-64
 
         border-r
@@ -39,6 +40,7 @@ export default function Sidebar({ isSidebarOpen}: Props) {
     >
       <nav className="flex flex-1 flex-col gap-2 p-4">
         <NavLink
+          onClick={() => setIsSidebarOpen(false)}
           to="/"
           end
           className={({ isActive }) =>
@@ -55,6 +57,7 @@ export default function Sidebar({ isSidebarOpen}: Props) {
         </NavLink>
 
         <NavLink
+          onClick={() => setIsSidebarOpen(false)}
           to="/places"
           className={({ isActive }) =>
             `flex items-center gap-3 rounded-xl px-4 py-3 transition
@@ -70,6 +73,7 @@ export default function Sidebar({ isSidebarOpen}: Props) {
         </NavLink>
 
         <NavLink
+          onClick={() => setIsSidebarOpen(false)}
           to="/add-place"
           className={({ isActive }) =>
             `flex items-center gap-3 rounded-xl px-4 py-3 transition
