@@ -1,4 +1,4 @@
-import AddPlaceForm from "../components/AddPlaceForm";
+import AddPlaceForm from "../places/add-place/AddPlaceForm";
 
 export default function AddPlace() {
   return (
