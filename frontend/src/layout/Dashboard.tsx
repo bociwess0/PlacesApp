@@ -28,13 +28,13 @@ export default function Dashboard() {
         ></div>
       )}
 
-      <div className="flex h-[calc(100vh-80px)]">
+      <div className="flex h-[calc(100vh-120px)] md:h-[calc(100vh-80px)]">
         <Sidebar
           isSidebarOpen={isSidebarOpen}
           setIsSidebarOpen={setIsSidebarOpen}
         />
 
-        <div className="flex-6/7 p-10 overflow-y-auto">
+        <div className="flex-6/7 p-5 overflow-y-auto">
           <main>
             <Outlet />
           </main>
