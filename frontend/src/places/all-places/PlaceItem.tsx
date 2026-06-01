@@ -1,15 +1,19 @@
+import { useState } from "react";
 import type { Place } from "../../types";
 import { MapPin, Map, Pencil, Trash2 } from "lucide-react";
+import PlacesMap from "../places-map/PlacesMap";
 
 interface Props {
   place: Place;
 }
 
 export default function PlaceItem({ place }: Props) {
+  const [showMap, setShowMap] = useState(false);
+
   return (
     <div
-      className="group flex-1 min-w-87.5 max-w-93  overflow-hidden rounded-3xl border border-slate-800 bg-slate-950/40
-                    transition-all duration-300  hover:border-violet-500/50"
+      className="group flex-1 min-w-80 md:min-w-87.5 max-w-93  overflow-hidden rounded-3xl border border-slate-800 bg-slate-950/40
+                    transition-all duration-300  hover:border-violet-500/50" 
     >
       {/* Image */}
       <div className="overflow-hidden">
@@ -53,6 +57,7 @@ export default function PlaceItem({ place }: Props) {
               hover:bg-violet-500
               cursor-pointer
             "
+            onClick={() => setShowMap(true)}
           >
             <Map size={18} />
             View Map
@@ -92,6 +97,7 @@ export default function PlaceItem({ place }: Props) {
           </button>
         </div>
       </div>
+      {showMap && <PlacesMap place={place} onClose={() => setShowMap(false)} />}
     </div>
   );
 }
