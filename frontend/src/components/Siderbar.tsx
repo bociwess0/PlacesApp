@@ -20,7 +20,7 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }: Props) {
         flex-col
 
         h-[calc(100vh-120px)]
-        md:h-[calc(100vh-80px)]
+        md:h-[calc(100vh-100px)]
         w-64
 
         border-r
