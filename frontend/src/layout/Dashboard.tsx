@@ -5,6 +5,9 @@ import { Outlet } from "react-router-dom";
 
 export default function Dashboard() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  console.log(setIsLoggedIn);
 
   return (
     <div className="h-screen overflow-hidden bg-[#111827]">
@@ -32,6 +35,7 @@ export default function Dashboard() {
         <Sidebar
           isSidebarOpen={isSidebarOpen}
           setIsSidebarOpen={setIsSidebarOpen}
+          isLoggedIn={isLoggedIn}
         />
 
         <div className="flex-6/7 p-5 overflow-y-auto">

@@ -1,13 +1,18 @@
-import { Users, MapPinned, PlusCircle, LogOut } from "lucide-react";
+import { Users, MapPinned, PlusCircle, LogOut, LogIn } from "lucide-react";
 import type { Dispatch, SetStateAction } from "react";
 import { NavLink } from "react-router-dom";
 
 interface Props {
   isSidebarOpen: boolean;
+  isLoggedIn: boolean;
   setIsSidebarOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }: Props) {
+export default function Sidebar({
+  isSidebarOpen,
+  isLoggedIn,
+  setIsSidebarOpen,
+}: Props) {
   return (
     <div
       className={`
@@ -39,22 +44,24 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }: Props) {
       `}
     >
       <nav className="flex flex-1 flex-col gap-2 p-4">
-        <NavLink
-          onClick={() => setIsSidebarOpen(false)}
-          to="/"
-          end
-          className={({ isActive }) =>
-            `flex items-center gap-3 rounded-xl px-4 py-3 transition
+        {isLoggedIn && (
+          <NavLink
+            onClick={() => setIsSidebarOpen(false)}
+            to="/"
+            end
+            className={({ isActive }) =>
+              `flex items-center gap-3 rounded-xl px-4 py-3 transition
       ${
         isActive
           ? "bg-violet-600 text-white"
           : "text-slate-300 hover:bg-slate-800 hover:text-white"
       }`
-          }
-        >
-          <Users size={20} />
-          <span>All Users</span>
-        </NavLink>
+            }
+          >
+            <Users size={20} />
+            <span>All Users</span>
+          </NavLink>
+        )}
 
         <NavLink
           onClick={() => setIsSidebarOpen(false)}
@@ -89,10 +96,18 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }: Props) {
         </NavLink>
       </nav>
       <div className="border-t border-slate-800 p-4">
-        <button className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-red-400 transition hover:bg-red-500/10">
-          <LogOut size={20} />
-          <span>Logout</span>
-        </button>
+        {isLoggedIn && (
+          <button className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-red-400 transition hover:bg-red-500/10">
+            <LogOut size={20} />
+            <span>Logout</span>
+          </button>
+        )}
+        {!isLoggedIn && (
+          <button className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-white transition hover:bg-violet-500/10">
+            <LogIn className="text-violet-500" size={20} />
+            <span>Login</span>
+          </button>
+        )}
       </div>
     </div>
   );
