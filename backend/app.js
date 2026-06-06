@@ -15,6 +15,11 @@ app.use('/api/places', (req, res, next) => {
   next();
 }, placesRoutes);
 
+app.use('/api/users', (req, res, next) => {
+  console.log('users ROUTE HIT');
+  next();
+}, placesRoutes);
+
 app.use('/api/places', placesRoutes); 
 app.use('/api/users', usersRoutes);
 
