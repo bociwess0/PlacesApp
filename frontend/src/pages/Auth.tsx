@@ -1,6 +1,6 @@
 import { Globe, MapPin, Pencil } from "lucide-react";
 import { useState } from "react";
-import AuthModal from "../auth/AuthModal";
+import AuthModal from "../auth/components/AuthModal";
 
 export default function Auth() {
   const [showModal, setShowModal] = useState(false);
