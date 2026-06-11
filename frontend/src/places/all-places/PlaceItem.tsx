@@ -38,7 +38,7 @@ export default function PlaceItem({ place }: Props) {
           <MapPin size={18} />
 
           <span className="text-sm">
-            {place.street}, {place.city}, {place.country}
+            {place.address}
           </span>
         </div>
 

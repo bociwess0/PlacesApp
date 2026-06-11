@@ -1,8 +1,11 @@
-import { places } from "../../data/all-data";
 import type { Place } from "../../types";
 import PlaceItem from "./PlaceItem";
 
-export default function PlacesList() {
+interface Props {
+  places: Place[]
+}
+
+export default function PlacesList({places}: Props) {
   return (
     <div className="flex flex-wrap gap-8 mt-8">
       {places.map((place: Place) => (

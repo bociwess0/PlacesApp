@@ -37,7 +37,7 @@ app.use(
     console.log("users ROUTE HIT");
     next();
   },
-  placesRoutes,
+  usersRoutes,
 );
 
 app.use("/api/places", placesRoutes);
