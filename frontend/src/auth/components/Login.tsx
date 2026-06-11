@@ -1,51 +1,54 @@
 import { Mail, Lock } from "lucide-react";
-// import { useState } from "react";
-// import { login } from "../api/services/auth";
-// import axios from "axios";
+import { useState } from "react";
+import { login } from "../api/services/auth";
+import axios from "axios";
 
 interface Props {
   onSwitchToRegister: () => void;
 }
 
-// interface ErrorResponse {
-//   message: string;
-// }
+interface ErrorResponse {
+  message: string;
+}
 
 export default function Login({ onSwitchToRegister }: Props) {
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [isLoading, setIsLoading] = useState(false);
-  // const [message, setMessage] = useState("");
-  // const [error, setError] = useState("");
+  const [userId, setUserId] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+  const [token, setToken] = useState("");
 
-  // const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-  //   event.preventDefault();
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
-  //   setError("");
-  //   setMessage("");
-  //   setIsLoading(true);
+    setError("");
+    setMessage("");
+    setIsLoading(true);
 
-  //   try {
-  //     const response = await login({
-  //       email,
-  //       password,
-  //     });
+    try {
+      const response = await login({
+        email,
+        password,
+      });
 
-  //     console.log(response);
+      setMessage("User has been logged in successfully!");
 
-  //     setMessage("Account created successfully!");
-
-  //     setName("");
-  //     setEmail("");
-  //     setPassword("");
-  //   } catch (err: unknown) {
-  //     if (axios.isAxiosError<ErrorResponse>(err)) {
-  //       setError(err.response?.data.message ?? "Something went wrong.");
-  //     }
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // };
+      setUserId(response.user);
+      setToken(response.token);
+      localStorage.setItem(
+        "userData",
+        JSON.stringify({ userId: userId, token: token }),
+      );
+    } catch (err: unknown) {
+      if (axios.isAxiosError<ErrorResponse>(err)) {
+        setError(err.response?.data.message ?? "Something went wrong.");
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <>
@@ -55,7 +58,7 @@ export default function Login({ onSwitchToRegister }: Props) {
         <p className="mt-3 text-slate-400">Login to your account to continue</p>
       </div>
 
-      <form className="mt-10 space-y-6">
+      <form className="mt-10 space-y-6" onSubmit={handleSubmit}>
         <div>
           <label className="mb-2 block text-sm text-slate-300">Email</label>
 
@@ -68,6 +71,7 @@ export default function Login({ onSwitchToRegister }: Props) {
             <input
               type="email"
               placeholder="Enter your email"
+              onChange={(e) => setEmail(e.target.value)}
               className="
                 w-full
                 rounded-xl
@@ -95,6 +99,7 @@ export default function Login({ onSwitchToRegister }: Props) {
             <input
               type="password"
               placeholder="Enter your password"
+              onChange={(e) => setPassword(e.target.value)}
               className="
                 w-full
                 rounded-xl
@@ -112,20 +117,72 @@ export default function Login({ onSwitchToRegister }: Props) {
 
         <button
           type="submit"
+          disabled={isLoading}
           className="
-            w-full
             rounded-xl
+                flex
+    w-full
+    items-center
+    justify-center
             bg-violet-600
             py-4
             font-semibold
             text-white
             transition
             hover:bg-violet-500
+
+                disabled:cursor-not-allowed
+    disabled:opacity-60
+    mb-5
           "
         >
-          Login
+          {isLoading ? (
+            <div
+              className="
+        h-5
+        w-5
+        animate-spin
+
+        rounded-full
+        border-2
+        border-white
+        border-t-transparent
+      "
+            />
+          ) : (
+            "Login"
+          )}
         </button>
       </form>
+
+      {message && (
+        <div
+          className="
+      rounded-xl
+      border border-green-500/20
+      bg-green-500/10
+      p-4
+      text-green-400
+      
+    "
+        >
+          {message}
+        </div>
+      )}
+
+      {error && (
+        <div
+          className="
+      rounded-xl
+      border border-red-500/20
+      bg-red-500/10
+      p-4
+      text-red-400
+    "
+        >
+          {error}
+        </div>
+      )}
 
       <p className="mt-8 text-center text-slate-400">
         Don't have an account?{" "}
