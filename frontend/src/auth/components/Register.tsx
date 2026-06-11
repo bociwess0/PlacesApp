@@ -2,6 +2,8 @@ import { Mail, Lock, User } from "lucide-react";
 import { useState } from "react";
 import { signup } from "../api/services/auth";
 import axios from "axios";
+import Message from "../ui/Message";
+import RegisterBtn from "../ui/RegisterBtn";
 
 interface Props {
   onSwitchToLogin: () => void;
@@ -143,76 +145,8 @@ export default function Register({ onSwitchToLogin }: Props) {
           </div>
         </div>
 
-        {message && (
-          <div
-            className="
-      rounded-xl
-      border border-green-500/20
-      bg-green-500/10
-      p-4
-      text-green-400
-    "
-          >
-            {message}
-          </div>
-        )}
-
-        {error && (
-          <div
-            className="
-      rounded-xl
-      border border-red-500/20
-      bg-red-500/10
-      p-4
-      text-red-400
-    "
-          >
-            {error}
-          </div>
-        )}
-
-        <button
-          type="submit"
-          disabled={isLoading}
-          className="
-    flex
-    w-full
-    items-center
-    justify-center
-
-    rounded-xl
-    bg-violet-600
-
-    py-4
-
-    font-semibold
-    text-white
-
-    transition
-
-    hover:bg-violet-500
-
-    disabled:cursor-not-allowed
-    disabled:opacity-60
-  "
-        >
-          {isLoading ? (
-            <div
-              className="
-        h-5
-        w-5
-        animate-spin
-
-        rounded-full
-        border-2
-        border-white
-        border-t-transparent
-      "
-            />
-          ) : (
-            "Create Account"
-          )}
-        </button>
+        <Message message={message} error={error} />
+        <RegisterBtn isLoading={isLoading} />
       </form>
 
       <p className="mt-8 text-center text-slate-400">
