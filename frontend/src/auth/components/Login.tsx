@@ -34,7 +34,7 @@ export default function Login({ onSwitchToRegister }: Props) {
         email,
         password,
       });
-
+      
       setMessage("User has been logged in successfully!");
 
       setUserId(response.user);
