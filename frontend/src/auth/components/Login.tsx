@@ -1,51 +1,51 @@
 import { Mail, Lock } from "lucide-react";
-import { useState } from "react";
-import { login } from "../api/services/auth";
-import axios from "axios";
+// import { useState } from "react";
+// import { login } from "../api/services/auth";
+// import axios from "axios";
 
 interface Props {
   onSwitchToRegister: () => void;
 }
 
-interface ErrorResponse {
-  message: string;
-}
+// interface ErrorResponse {
+//   message: string;
+// }
 
 export default function Login({ onSwitchToRegister }: Props) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [message, setMessage] = useState("");
-  const [error, setError] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [isLoading, setIsLoading] = useState(false);
+  // const [message, setMessage] = useState("");
+  // const [error, setError] = useState("");
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  // const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  //   event.preventDefault();
 
-    setError("");
-    setMessage("");
-    setIsLoading(true);
+  //   setError("");
+  //   setMessage("");
+  //   setIsLoading(true);
 
-    try {
-      const response = await login({
-        email,
-        password,
-      });
+  //   try {
+  //     const response = await login({
+  //       email,
+  //       password,
+  //     });
 
-      console.log(response);
+  //     console.log(response);
 
-      setMessage("Account created successfully!");
+  //     setMessage("Account created successfully!");
 
-      setName("");
-      setEmail("");
-      setPassword("");
-    } catch (err: unknown) {
-      if (axios.isAxiosError<ErrorResponse>(err)) {
-        setError(err.response?.data.message ?? "Something went wrong.");
-      }
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  //     setName("");
+  //     setEmail("");
+  //     setPassword("");
+  //   } catch (err: unknown) {
+  //     if (axios.isAxiosError<ErrorResponse>(err)) {
+  //       setError(err.response?.data.message ?? "Something went wrong.");
+  //     }
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
 
   return (
     <>

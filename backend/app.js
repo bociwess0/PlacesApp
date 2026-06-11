@@ -1,4 +1,5 @@
 const express = require("express");
+const bcrypt = require("bcryptjs");
 const mongoose = require("mongoose");
 
 const bodyParser = require("body-parser");
@@ -58,7 +59,7 @@ app.use((error, req, res, next) => {
 
 mongoose
   .connect(
-    "mongodb+srv://bogdan:yrFSrFrH1DYYhuoB@cluster0.hohmdjq.mongodb.net/places?retryWrites=true&w=majority",
+    `mongodb+srv://bogdan:yrFSrFrH1DYYhuoB@cluster0.hohmdjq.mongodb.net/places?retryWrites=true&w=majority`,
   )
   .then(() => {
     app.listen(5000);
