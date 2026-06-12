@@ -9,9 +9,10 @@ export default function AppRoutes() {
   return (
     <Routes>
       <Route element={<Dashboard />}>
-        <Route path="/" element={<Auth />} />
-        <Route path="/users" element={<Users />} />
+        <Route path="/" element={<Places />} />
         <Route path="/places" element={<Places />} />
+        <Route path="/users" element={<Users />} />
+        <Route path="/auth" element={<Auth />} />
         <Route path="/add-place" element={<AddPlace />} />
       </Route>
     </Routes>

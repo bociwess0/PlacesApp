@@ -2,9 +2,13 @@ import { useEffect, useState } from "react";
 import PlacesList from "../places/all-places/PlacesList";
 import type { Place } from "../types";
 import { getPlacesById } from "../auth/api/services/places";
+import { useSelector } from "react-redux";
+import type { RootState } from "../store/store";
+import AuthRequired from "../auth/components/AuthRequired";
 
 export default function Places() {
   const [places, setPlaces] = useState<Place[]>([]);
+  const isAuthenticated = useSelector((state: RootState) => state.userActions.isAuthenticated);
 
   useEffect(() => {
     async function getPlacesByUserId(uid: string) {
@@ -22,6 +26,10 @@ export default function Places() {
       getPlacesByUserId(user.userId);
     }
   }, []);
+
+  if (!isAuthenticated) {
+    return <AuthRequired />;
+  }
 
   return (
     <div>
