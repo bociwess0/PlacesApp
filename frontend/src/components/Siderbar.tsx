@@ -1,18 +1,19 @@
 import { Users, MapPinned, PlusCircle, LogOut, LogIn } from "lucide-react";
 import type { Dispatch, SetStateAction } from "react";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import type { RootState } from "../store/store";
 
 interface Props {
   isSidebarOpen: boolean;
-  isLoggedIn: boolean;
   setIsSidebarOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-export default function Sidebar({
-  isSidebarOpen,
-  isLoggedIn,
-  setIsSidebarOpen,
-}: Props) {
+export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }: Props) {
+  const userLoggedIn = useSelector(
+    (state: RootState) => state.userActions.isAuthenticated,
+  );
+
   return (
     <div
       className={`
@@ -44,7 +45,7 @@ export default function Sidebar({
       `}
     >
       <nav className="flex flex-1 flex-col gap-2 p-4">
-        {isLoggedIn && (
+        {userLoggedIn && (
           <NavLink
             onClick={() => setIsSidebarOpen(false)}
             to="/"
@@ -95,20 +96,15 @@ export default function Sidebar({
           <span>Add Place</span>
         </NavLink>
       </nav>
-      <div className="border-t border-slate-800 p-4">
-        {isLoggedIn && (
-          <button className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-red-400 transition hover:bg-red-500/10">
+
+      {userLoggedIn && (
+        <div className="border-t border-slate-800 p-4">
+          <button className="cursor-pointer flex w-full items-center gap-3 rounded-xl px-4 py-3 text-red-400 transition hover:bg-red-500/10">
             <LogOut size={20} />
             <span>Logout</span>
           </button>
-        )}
-        {!isLoggedIn && (
-          <button className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-white transition hover:bg-violet-500/10">
-            <LogIn className="text-violet-500" size={20} />
-            <span>Login</span>
-          </button>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }

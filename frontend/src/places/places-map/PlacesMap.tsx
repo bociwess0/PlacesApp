@@ -95,11 +95,7 @@ export default function PlacesMap({ place, onClose }: Props) {
                 <MapPin size={20} className="mt-0.5 text-violet-400" />
 
                 <div>
-                  <p className="text-slate-300">{place.street}</p>
-
-                  <p className="text-slate-400">
-                    {place.city}, {place.country}
-                  </p>
+                  <p className="text-slate-300">{place.address}</p>
                 </div>
               </div>
 
@@ -113,8 +109,8 @@ export default function PlacesMap({ place, onClose }: Props) {
                 <Compass size={20} className="mt-0.5 text-violet-400" />
 
                 <div className="text-slate-500">
-                  <p>Latitude: {place.latitude}</p>
-                  <p>Longitude: {place.longitude}</p>
+                  <p>Latitude: {place.location.lat}</p>
+                  <p>Longitude: {place.location.lng}</p>
                 </div>
               </div>
             </div>
@@ -128,7 +124,7 @@ export default function PlacesMap({ place, onClose }: Props) {
                 width="100%"
                 height="500"
                 loading="lazy"
-                src={`https://maps.google.com/maps?q=${place.latitude},${place.longitude}&z=15&output=embed`}
+                src={`https://maps.google.com/maps?q=${place.location.lat},${place.location.lng}&z=15&output=embed`}
               />
             </div>
           </div>

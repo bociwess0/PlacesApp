@@ -12,7 +12,10 @@ export interface Place {
   address: string;
   city: string;
   country: string;
-  latitude: number;
+  location: {
+    lat: string,
+    lng: string
+  };
   longitude: number;
   description: string;
   image: string;

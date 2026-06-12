@@ -4,6 +4,9 @@ import { login } from "../api/services/auth";
 import axios from "axios";
 import Message from "../ui/Message";
 import LoginBtn from "../ui/LoginBtn";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../../store/userSlice";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   onSwitchToRegister: () => void;
@@ -14,13 +17,14 @@ interface ErrorResponse {
 }
 
 export default function Login({ onSwitchToRegister }: Props) {
-  const [userId, setUserId] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
-  const [token, setToken] = useState("");
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -34,15 +38,27 @@ export default function Login({ onSwitchToRegister }: Props) {
         email,
         password,
       });
-      
       setMessage("User has been logged in successfully!");
 
-      setUserId(response.user);
-      setToken(response.token);
+      const tokenExpirationDate =
+        response.expirationDate ||
+        new Date(new Date().getDate() + 1000 * 60 * 60);
+
+      const userLoggedIn = JSON.stringify({
+          userId: response.user,
+          token: response.token,
+          expiration: tokenExpirationDate.toISOString(),
+        })
+
       localStorage.setItem(
         "userData",
-        JSON.stringify({ userId: userId, token: token }),
+        userLoggedIn
       );
+
+      dispatch(loginUser({userId: response.user, email: response.email, name: response.name, token: response.token}))
+
+      navigate("/places")
+
     } catch (err: unknown) {
       if (axios.isAxiosError<ErrorResponse>(err)) {
         setError(err.response?.data.message ?? "Something went wrong.");

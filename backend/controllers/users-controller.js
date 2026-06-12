@@ -176,7 +176,7 @@ const login = async (req, res, next) => {
 
   res
     .status(201)
-    .json({ user: existingUser.id, email: existingUser.email, token: token });
+    .json({ user: existingUser.id, email: existingUser.email, name: existingUser.name, token: token });
 };
 
 exports.getUsers = getUsers;
