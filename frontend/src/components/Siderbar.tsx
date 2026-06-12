@@ -1,21 +1,27 @@
 import { MapPinned, PlusCircle, LogOut } from "lucide-react";
-import type { Dispatch, SetStateAction } from "react";
-import { useSelector } from "react-redux";
+import { useState, type Dispatch, type SetStateAction } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import type { RootState } from "../store/store";
+import { logoutUser } from "../store/userSlice";
+import ConfirmModal from "../helpers/ConfirmModal";
 
 interface Props {
   isSidebarOpen: boolean;
   setIsSidebarOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-export default function Sidebar({
-  isSidebarOpen,
-  setIsSidebarOpen,
-}: Props) {
+export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }: Props) {
   const isAuthenticated = useSelector(
-    (state: RootState) => state.userActions.isAuthenticated
+    (state: RootState) => state.userActions.isAuthenticated,
   );
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(logoutUser());
+  };
 
   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
     `flex items-center gap-3 rounded-xl px-4 py-3 transition ${
@@ -31,7 +37,6 @@ export default function Sidebar({
       } lg:static lg:w-1/7 lg:translate-x-0`}
     >
       <nav className="flex flex-1 flex-col gap-2 p-4">
-
         <NavLink
           to="/places"
           onClick={() => setIsSidebarOpen(false)}
@@ -53,11 +58,25 @@ export default function Sidebar({
 
       {isAuthenticated && (
         <div className="border-t border-slate-800 p-4">
-          <button className="flex w-full cursor-pointer items-center gap-3 rounded-xl px-4 py-3 text-red-400 transition hover:bg-red-500/10">
+          <button
+            onClick={() => setShowLogoutModal(true)}
+            className="flex w-full cursor-pointer items-center gap-3 rounded-xl px-4 py-3 text-red-400 transition hover:bg-red-500/10"
+          >
             <LogOut size={20} />
             <span>Logout</span>
           </button>
         </div>
+      )}
+
+      {showLogoutModal && (
+        <ConfirmModal
+          title="Logout"
+          message="Are you sure you want to logout?"
+          confirmText="Logout"
+          variant="danger"
+          onConfirm={handleLogout}
+          onClose={() => setShowLogoutModal(false)}
+        />
       )}
     </aside>
   );
