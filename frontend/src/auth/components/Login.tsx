@@ -47,6 +47,8 @@ export default function Login({ onSwitchToRegister }: Props) {
       const userLoggedIn = JSON.stringify({
           userId: response.user,
           token: response.token,
+          email: response.email,
+          name: response.name,
           expiration: tokenExpirationDate.toISOString(),
         })
 

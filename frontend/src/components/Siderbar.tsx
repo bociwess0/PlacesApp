@@ -21,6 +21,7 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }: Props) {
 
   const handleLogout = () => {
     dispatch(logoutUser());
+    localStorage.removeItem("userData");
   };
 
   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
