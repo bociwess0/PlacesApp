@@ -3,6 +3,8 @@ import logo from "../assets/logo.svg";
 import SearchInput from "../components/SearchInput";
 import type { Dispatch, SetStateAction } from "react";
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+import type { RootState } from "../store/store";
 
 interface Props {
   isSidebarOpen: boolean;
@@ -10,6 +12,8 @@ interface Props {
 }
 
 export default function Header({ isSidebarOpen, setIsSidebarOpen }: Props) {
+
+  const places = useSelector((state: RootState) => state.placesAction.places)
   
   return (
     <header className="sticky top-0 z-50 border-b border-slate-800 bg-[#040B1A]">
@@ -41,7 +45,7 @@ export default function Header({ isSidebarOpen, setIsSidebarOpen }: Props) {
           </NavLink>
 
           <div className="flex items-center gap-8">
-            <SearchInput />
+            {places && places.length > 0 && <SearchInput />}
 
             <button className="text-slate-300 transition hover:text-white">
               <Bell size={26} />

@@ -1,6 +1,11 @@
 import { Search } from "lucide-react";
+import { useDispatch } from "react-redux";
+import { setSearchTerm } from "../store/placesSlice";
 
 export default function SearchInput() {
+
+  const dispatch = useDispatch();
+
   return (
     <div className="relative">
       <Search
@@ -11,6 +16,9 @@ export default function SearchInput() {
       <input
         type="text"
         placeholder="Search users..."
+        onChange={(e) => {
+          dispatch(setSearchTerm(e.target.value));
+        }}
         className="
           h-12
           w-full
