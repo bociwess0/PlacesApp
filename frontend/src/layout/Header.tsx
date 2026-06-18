@@ -10,6 +10,7 @@ interface Props {
 }
 
 export default function Header({ isSidebarOpen, setIsSidebarOpen }: Props) {
+  
   return (
     <header className="sticky top-0 z-50 border-b border-slate-800 bg-[#040B1A]">
       <div className="px-4 py-4 md:px-8">

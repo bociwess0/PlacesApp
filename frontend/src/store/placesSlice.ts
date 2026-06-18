@@ -1,0 +1,26 @@
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit"
+import type { Place } from "../types"
+
+interface PlacesState {
+    places: Place[]
+}
+
+const initialState:PlacesState = {
+    places: []
+}
+
+const placesSlice = createSlice({
+    name: "places",
+    initialState,
+    reducers:{
+        setPlaces: (state, action:PayloadAction<{places: Place[]}>) => {
+            state.places = action.payload.places
+        }
+    }
+})
+
+const placesReducer = placesSlice.reducer;
+
+export const setPlaces = placesSlice.actions.setPlaces;
+
+export default placesReducer;

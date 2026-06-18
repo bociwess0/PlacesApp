@@ -1,21 +1,21 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import PlacesList from "../places/all-places/PlacesList";
-import type { Place } from "../types";
 import { getPlacesById } from "../auth/api/services/places";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../store/store";
 import AuthRequired from "../auth/components/AuthRequired";
 import { loginUser } from "../store/userSlice";
+import { setPlaces } from "../store/placesSlice";
 
 export default function Places() {
-  const [places, setPlaces] = useState<Place[]>([]);
   const isAuthenticated = useSelector((state: RootState) => state.userActions.isAuthenticated);
+  const places = useSelector((state: RootState) => state.placesAction.places)
   const dispatch = useDispatch();
 
   useEffect(() => {
     async function getPlacesByUserId(uid: string) {
       const fetchedPlaces = await getPlacesById(uid);
-      setPlaces(fetchedPlaces);
+      dispatch(setPlaces({places: fetchedPlaces}))
     }
 
     const user: {
