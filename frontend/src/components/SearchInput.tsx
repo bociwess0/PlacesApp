@@ -15,7 +15,7 @@ export default function SearchInput() {
 
       <input
         type="text"
-        placeholder="Search users..."
+        placeholder="Search places..."
         onChange={(e) => {
           dispatch(setSearchTerm(e.target.value));
         }}

@@ -12,12 +12,11 @@ interface Props {
 }
 
 export default function Header({ isSidebarOpen, setIsSidebarOpen }: Props) {
+  const places = useSelector((state: RootState) => state.placesAction.places);
 
-  const places = useSelector((state: RootState) => state.placesAction.places)
-  
   return (
     <header className="sticky top-0 z-50 border-b border-slate-800 bg-[#040B1A]">
-      <div className="px-4 py-4 md:px-8">
+      <div className="px-6 py-6 md:px-8">
         {/* Mobile Header */}
         <div className="relative flex items-center justify-between md:hidden">
           <button
@@ -27,11 +26,11 @@ export default function Header({ isSidebarOpen, setIsSidebarOpen }: Props) {
             <Menu size={24} />
           </button>
 
-          <NavLink to={"/"} className={'absolute left-1/2 h-14 -translate-x-1/2'}>
-            <img
-              src={logo}
-              alt="YourPlaces Logo"
-            />
+          <NavLink
+            to={"/"}
+            className={"absolute left-1/2 h-14 -bottom-3 -translate-x-1/2"}
+          >
+            <img src={logo} alt="YourPlaces Logo" />
           </NavLink>
 
           <button className="text-slate-300 transition hover:text-white">
@@ -64,9 +63,12 @@ export default function Header({ isSidebarOpen, setIsSidebarOpen }: Props) {
         </div>
 
         {/* Mobile Search */}
-        <div className="mt-4 md:hidden">
-          <SearchInput />
-        </div>
+
+        {places && places.length > 0 && (
+          <div className="mt-4 md:hidden">
+            <SearchInput />
+          </div>
+        )}
       </div>
     </header>
   );
