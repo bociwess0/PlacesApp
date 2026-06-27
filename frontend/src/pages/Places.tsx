@@ -6,6 +6,7 @@ import type { RootState } from "../store/store";
 import AuthRequired from "../auth/components/AuthRequired";
 import { loginUser } from "../store/userSlice";
 import { setPlaces } from "../store/placesSlice";
+import NoPlacesFound from "../auth/components/NoPlacesFound";
 
 export default function Places() {
   const isAuthenticated = useSelector(
@@ -23,7 +24,7 @@ export default function Places() {
   const filteredPlaces = places.filter(
     (place) =>
       place.title.toLowerCase().includes(term) ||
-      place.address.toLowerCase().includes(term)
+      place.address.toLowerCase().includes(term),
   );
 
   useEffect(() => {
@@ -54,6 +55,16 @@ export default function Places() {
 
   if (!isAuthenticated) {
     return <AuthRequired />;
+  }
+
+  if (filteredPlaces.length === 0) {
+    return (
+      <>
+        <h1 className="text-5xl font-bold text-white">Places</h1>
+
+        <NoPlacesFound />
+      </>
+    );
   }
 
   return (
