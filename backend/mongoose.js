@@ -2,17 +2,15 @@ const mongoose = require("mongoose");
 
 const Product = require("./models/product");
 
-mongoose.connect(
-  'mongodb+srv://backend_user:3O8QLWCI8FytuN8W@cluster0.hohmdjq.mongodb.net/products?retryWrites=true&w=majority'
-)
-.then(() => {
-  console.log('Connected to database!');
-})
-.catch(err => {
-  console.error('Connection failed!');
-  console.error(err);
-});
-
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(() => {
+    console.log("Connected to database!");
+  })
+  .catch((err) => {
+    console.error("Connection failed!");
+    console.error(err);
+  });
 
 const createProduct = async (req, res, next) => {
   const createdProduct = new Product({

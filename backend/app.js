@@ -1,8 +1,8 @@
 const express = require("express");
-
 const mongoose = require("mongoose");
-
 const bodyParser = require("body-parser");
+
+require("dotenv").config();
 
 const placesRoutes = require("./routes/places-routes");
 const usersRoutes = require("./routes/users-routes");
@@ -18,52 +18,41 @@ app.use((req, res, next) => {
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept, Authorization",
   );
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PATCH, DELETE",
+  );
 
   next();
 });
-
-app.use(
-  "/api/places",
-  (req, res, next) => {
-    console.log("PLACES ROUTE HIT");
-    next();
-  },
-  placesRoutes,
-);
-
-app.use(
-  "/api/users",
-  (req, res, next) => {
-    console.log("users ROUTE HIT");
-    next();
-  },
-  usersRoutes,
-);
 
 app.use("/api/places", placesRoutes);
 app.use("/api/users", usersRoutes);
 
 app.use((req, res, next) => {
-  const error = new HttpError("Could not find this route.", 404);
-  throw error;
+  throw new HttpError("Could not find this route.", 404);
 });
 
 app.use((error, req, res, next) => {
   if (res.headerSent) {
     return next(error);
   }
-  res.status(error.code || 500);
-  res.json({ message: error.message || "An unknown error occurred!" });
+
+  res.status(error.code || 500).json({
+    message: error.message || "An unknown error occurred!",
+  });
 });
 
+const PORT = process.env.PORT || 5000;
+
 mongoose
-  .connect(
-    `mongodb+srv://bogdan:yrFSrFrH1DYYhuoB@cluster0.hohmdjq.mongodb.net/places?retryWrites=true&w=majority`,
-  )
+  .connect(process.env.MONGODB_URI)
   .then(() => {
-    app.listen(5000);
+    app.listen(PORT, () => {
+      console.log(`✅ Server running on port ${PORT}`);
+    });
   })
   .catch((err) => {
-    console.log(err);
+    console.error("MongoDB connection failed:");
+    console.error(err);
   });
