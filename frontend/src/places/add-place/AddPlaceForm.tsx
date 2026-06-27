@@ -1,154 +1,161 @@
 import { PlusCircle } from "lucide-react";
+import { useState } from "react";
+import { createPlace } from "../../auth/api/services/places";
+import type { RootState } from "../../store/store";
+import { useSelector } from "react-redux";
+import AuthRequired from "../../auth/components/AuthRequired";
 
 export default function AddPlaceForm() {
-  return (
-    <div
-      className="
-        max-w-5xl
-        rounded-3xl
-        border
-        border-slate-800
-        bg-slate-950/30
-        p-4
-        md:p-8
-      "
-    >
-      <div className="border-b border-slate-800 pb-4">
-        <h1 className="text-xl md:text-4xl font-bold text-white">
-          Add Place
-        </h1>
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.userActions.isAuthenticated,
+  );
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [address, setAddress] = useState("");
+  const [image, setImage] = useState("");
 
-        <p className="mt-4 md:text-lg text-slate-400">
-          Fill in the details below to add a new place.
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    setLoading(true);
+    setError("");
+
+    try {
+      await createPlace({
+        title,
+        description,
+        address,
+        image,
+      });
+
+      setTitle("");
+      setDescription("");
+      setAddress("");
+      setImage("");
+
+      alert("Place created successfully!");
+    } catch {
+      setError("Failed to create place.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (!isAuthenticated) {
+    return <AuthRequired />;
+  }
+
+  return (
+    <div className="w-full max-w-5xl">
+      <div className="pb-5">
+        <h1 className="text-3xl font-bold text-white md:text-4xl">Add Place</h1>
+
+        <p className="mt-2 text-slate-400">
+          Create a new destination and share your favorite places around the
+          world.
         </p>
       </div>
 
-      <form className="mt-5 flex flex-col gap-8">
-        <div>
-          <label
-            htmlFor="title"
-            className="mb-3 block text-lg font-semibold text-white"
-          >
-            Title
-          </label>
+      <form onSubmit={handleSubmit} className="mt-8 space-y-6">
+        <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
+          <div>
+            <label
+              htmlFor="title"
+              className="mb-2 block text-sm font-semibold uppercase tracking-wide text-slate-300"
+            >
+              Title
+            </label>
 
-          <input
-            id="title"
-            type="text"
-            placeholder="Enter place title"
-            className="
-              w-full
-              rounded-2xl
-              border
-              border-slate-800
-              bg-slate-950/50
-              px-5
-              py-4
-              text-white
-              outline-none
-              transition-all
+            <input
+              id="title"
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="Empire State Building"
+              className="w-full rounded-xl border border-slate-800 bg-slate-950/60 px-5 py-3.5 text-white outline-none transition placeholder:text-slate-500 focus:border-violet-500 focus:ring-2 focus:ring-violet-500/20"
+            />
+          </div>
 
-              placeholder:text-slate-500
+          <div>
+            <label
+              htmlFor="address"
+              className="mb-2 block text-sm font-semibold uppercase tracking-wide text-slate-300"
+            >
+              Address
+            </label>
 
-              focus:border-violet-500/50
-              focus:ring-2
-              focus:ring-violet-500/20
-            "
-          />
+            <input
+              id="address"
+              type="text"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              placeholder="New York, USA"
+              className="w-full rounded-xl border border-slate-800 bg-slate-950/60 px-5 py-3.5 text-white outline-none transition placeholder:text-slate-500 focus:border-violet-500 focus:ring-2 focus:ring-violet-500/20"
+            />
+          </div>
         </div>
 
         <div>
           <label
             htmlFor="description"
-            className="mb-3 block text-lg font-semibold text-white"
+            className="mb-2 block text-sm font-semibold uppercase tracking-wide text-slate-300"
           >
             Description
           </label>
 
           <textarea
             id="description"
-            rows={5}
-            placeholder="Describe your place..."
-            className="
-              w-full
-              resize-none
-              rounded-2xl
-              border
-              border-slate-800
-              bg-slate-950/50
-              px-5
-              py-4
-              text-white
-              outline-none
-              transition-all
-
-              placeholder:text-slate-500
-
-              focus:border-violet-500/50
-              focus:ring-2
-              focus:ring-violet-500/20
-            "
+            rows={4}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            placeholder="Tell us something interesting about this place..."
+            className="w-full resize-none rounded-xl border border-slate-800 bg-slate-950/60 px-5 py-3.5 text-white outline-none transition placeholder:text-slate-500 focus:border-violet-500 focus:ring-2 focus:ring-violet-500/20"
           />
         </div>
 
         <div>
           <label
-            htmlFor="address"
-            className="mb-3 block text-lg font-semibold text-white"
+            htmlFor="image"
+            className="mb-2 block text-sm font-semibold uppercase tracking-wide text-slate-300"
           >
-            Address
+            Image
           </label>
 
           <input
-            id="address"
+            id="image"
             type="text"
-            placeholder="Enter address"
-            className="
-              w-full
-              rounded-2xl
-              border
-              border-slate-800
-              bg-slate-950/50
-              px-5
-              py-4
-              text-white
-              outline-none
-              transition-all
-
-              placeholder:text-slate-500
-
-              focus:border-violet-500/50
-              focus:ring-2
-              focus:ring-violet-500/20
-            "
+            value={image}
+            onChange={(e) => setImage(e.target.value)}
+            placeholder="/images/places/big-ben.webp"
+            className="w-full rounded-xl border border-slate-800 bg-slate-950/60 px-5 py-3.5 text-white outline-none transition placeholder:text-slate-500 focus:border-violet-500 focus:ring-2 focus:ring-violet-500/20"
           />
+
+          <p className="mt-2 text-xs text-slate-500">
+            For now enter the image path from{" "}
+            <span className="font-medium text-violet-400">
+              /public/images/places
+            </span>
+            .
+          </p>
         </div>
 
-        <div>
+        {error && (
+          <div className="rounded-xl border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm text-red-400">
+            {error}
+          </div>
+        )}
+
+        <div className="flex flex-col-reverse gap-3 border-t border-slate-800 pt-5 sm:flex-row sm:justify-end">
           <button
             type="submit"
-            className="
-              flex items-center gap-3
-              rounded-2xl
-
-              bg-violet-600
-              px-8
-              py-4
-
-              font-semibold
-              text-white
-
-              transition-all
-
-              hover:bg-violet-500
-              hover:shadow-lg
-              hover:shadow-violet-500/30
-              cursor-pointer
-            "
+            disabled={loading}
+            className="flex cursor-pointer items-center justify-center gap-2 rounded-xl bg-violet-600 px-6 py-3 font-semibold text-white transition hover:bg-violet-500 hover:shadow-lg hover:shadow-violet-500/30 disabled:cursor-not-allowed disabled:opacity-50"
           >
-            <PlusCircle size={20} />
-
-            <span>ADD PLACE</span>
+            <PlusCircle size={18} />
+            <span>{loading ? "Creating..." : "Add Place"}</span>
           </button>
         </div>
       </form>
