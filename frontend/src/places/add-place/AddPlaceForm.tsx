@@ -16,12 +16,14 @@ export default function AddPlaceForm() {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     setLoading(true);
     setError("");
+    setSuccess("");
 
     try {
       await createPlace({
@@ -36,7 +38,7 @@ export default function AddPlaceForm() {
       setAddress("");
       setImage("");
 
-      alert("Place created successfully!");
+      setSuccess("Your place has been created successfully!");
     } catch {
       setError("Failed to create place.");
     } finally {
@@ -111,7 +113,7 @@ export default function AddPlaceForm() {
             rows={4}
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            placeholder="Tell us something interesting about this place..."
+            placeholder="Tell us something interesting about this place... (minimum 6 letter word)"
             className="w-full resize-none rounded-xl border border-slate-800 bg-slate-950/60 px-5 py-3.5 text-white outline-none transition placeholder:text-slate-500 focus:border-violet-500 focus:ring-2 focus:ring-violet-500/20"
           />
         </div>
@@ -145,6 +147,27 @@ export default function AddPlaceForm() {
         {error && (
           <div className="rounded-xl border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm text-red-400">
             {error}
+          </div>
+        )}
+
+        {success && (
+          <div className="flex items-center gap-3 rounded-xl border border-emerald-500/20 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-400">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5 shrink-0"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M5 13l4 4L19 7"
+              />
+            </svg>
+
+            <span>{success}</span>
           </div>
         )}
 
