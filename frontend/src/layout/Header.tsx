@@ -16,7 +16,7 @@ export default function Header({ isSidebarOpen, setIsSidebarOpen }: Props) {
 
   return (
     <header className="sticky top-0 z-50 border-b border-slate-800 bg-[#040B1A]">
-      <div className="px-6 py-6 md:px-8">
+      <div className="px-6 py-6 md:py-4 md:px-8">
         {/* Mobile Header */}
         <div className="relative flex items-center justify-between md:hidden">
           <button

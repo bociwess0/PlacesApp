@@ -15,6 +15,11 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }: Props) {
   const isAuthenticated = useSelector(
     (state: RootState) => state.userActions.isAuthenticated,
   );
+  const places = useSelector((state: RootState) => state.placesAction.places);
+
+  const sidebarTop = places && places.length > 0 ? "top-35" : "top-18";
+  const sidebarHeight = places && places.length > 0 ? "h-[calc(100vh-140px)]" : "h-[calc(100vh-70px)]";
+
   const [showLogoutModal, setShowLogoutModal] = useState(false);
 
   const dispatch = useDispatch();
@@ -32,8 +37,8 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }: Props) {
     }`;
 
   return (
-    <aside
-      className={`fixed left-0 top-30 z-50 flex h-[calc(100vh-120px)] w-64 flex-col border-r border-slate-800 bg-slate-950 transition-transform duration-300 ease-in-out md:h-[calc(100vh-100px)] ${
+    <div
+      className={`fixed left-0 ${sidebarTop} md:top-30 z-50 flex ${sidebarHeight} w-64 flex-col border-r border-slate-800 bg-slate-950 transition-transform duration-300 ease-in-out md:h-[calc(100vh-100px)] ${
         isSidebarOpen ? "translate-x-0" : "-translate-x-full"
       } lg:static lg:w-1/7 lg:translate-x-0`}
     >
@@ -79,6 +84,6 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }: Props) {
           onClose={() => setShowLogoutModal(false)}
         />
       )}
-    </aside>
+    </div>
   );
 }
