@@ -1,7 +1,8 @@
 import { useState } from "react";
 import type { Place } from "../../types";
-import { MapPin, Map, Pencil, Trash2 } from "lucide-react";
+import { MapPin, Map, Pencil } from "lucide-react";
 import PlacesMap from "../places-map/PlacesMap";
+import DeletePlaceBtn from "../../auth/ui/DeletePlaceBtn";
 
 interface Props {
   place: Place;
@@ -81,20 +82,7 @@ export default function PlaceItem({ place }: Props) {
             Edit
           </button>
 
-          <button
-            className="
-              flex items-center gap-2
-              rounded-xl
-              border border-red-500/20
-              px-4 py-3
-              text-sm font-medium text-red-400
-              transition
-              hover:bg-red-500/10  cursor-pointer
-            "
-          >
-            <Trash2 size={18} />
-            Delete
-          </button>
+          <DeletePlaceBtn place={place} />
         </div>
       </div>
       {showMap && <PlacesMap place={place} onClose={() => setShowMap(false)} />}

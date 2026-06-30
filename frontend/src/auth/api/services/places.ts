@@ -11,8 +11,6 @@ export async function getPlacesById(uid: string) {
   }
 }
 
-
-
 interface CreatePlaceData {
   title: string;
   description: string;
@@ -45,5 +43,23 @@ export async function createPlace(place: CreatePlaceData) {
   } catch (error) {
     console.log("Error creating place!");
     throw error;
+  }
+}
+
+export async function deletePlace(placeId: string) {
+  try {
+    const user = JSON.parse(localStorage.getItem("userData") ?? "null");
+
+    if (!user) {
+      throw new Error("User is not authenticated.");
+    }
+    api.delete(`/places/${placeId}`, {
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
+    });
+  } catch (error) {
+    console.log("Error while trying to delete place!");
+    return error;
   }
 }

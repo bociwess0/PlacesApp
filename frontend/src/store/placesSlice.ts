@@ -21,6 +21,9 @@ const placesSlice = createSlice({
     setSearchTerm: (state, action: PayloadAction<string>) => {
       state.searchTerm = action.payload;
     },
+    deletePlaceItem: (state, action: PayloadAction<{ placeId: string }>) => {
+      state.places = state.places.filter((place: Place) => place._id != action.payload.placeId)
+    },
   },
 });
 
@@ -28,5 +31,6 @@ const placesReducer = placesSlice.reducer;
 
 export const setPlaces = placesSlice.actions.setPlaces;
 export const setSearchTerm = placesSlice.actions.setSearchTerm;
+export const deletePlaceItem = placesSlice.actions.deletePlaceItem;
 
 export default placesReducer;

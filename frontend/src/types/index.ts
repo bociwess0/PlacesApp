@@ -7,6 +7,7 @@ export interface User {
 
 export interface Place {
   id: number;
+  _id: string;
   title: string;
   street: string;
   address: string;
