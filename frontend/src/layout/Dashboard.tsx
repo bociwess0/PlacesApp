@@ -2,6 +2,7 @@ import { useState } from "react";
 import Sidebar from "../components/Siderbar";
 import Header from "./Header";
 import { Outlet } from "react-router-dom";
+import AppSnackbar from "../helpers/Snackbar";
 
 export default function Dashboard() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -37,6 +38,7 @@ export default function Dashboard() {
         <div className="flex-6/7 p-5 overflow-y-auto">
           <main>
             <Outlet />
+            <AppSnackbar />
           </main>
         </div>
       </div>

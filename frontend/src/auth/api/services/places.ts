@@ -47,19 +47,25 @@ export async function createPlace(place: CreatePlaceData) {
 }
 
 export async function deletePlace(placeId: string) {
+  
   try {
     const user = JSON.parse(localStorage.getItem("userData") ?? "null");
 
     if (!user) {
       throw new Error("User is not authenticated.");
     }
-    api.delete(`/places/${placeId}`, {
+
+
+    const response = await api.delete(`/places/${placeId}`, {
       headers: {
         Authorization: `Bearer ${user.token}`,
       },
     });
+
+    return { ok: true, data: response.data };
+
   } catch (error) {
     console.log("Error while trying to delete place!");
-    return error;
+    return { ok: false, message: error };
   }
 }

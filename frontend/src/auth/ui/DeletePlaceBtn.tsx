@@ -5,6 +5,7 @@ import { deletePlace } from "../api/services/places";
 import ConfirmModal from "../../helpers/ConfirmModal";
 import { useDispatch } from "react-redux";
 import { deletePlaceItem } from "../../store/placesSlice";
+import { showSnackbar } from "../../store/snackbarSlice";
 
 interface Props {
   place: Place;
@@ -20,11 +21,38 @@ export default function DeletePlaceBtn({ place }: Props) {
 
   const handleDelete = async () => {
     setIsLoading(true);
+
+
     try {
-      await deletePlace(place._id);
-      dispatch(deletePlaceItem({placeId: place._id}));
+
+      const response = await deletePlace(place._id);      
+
+      if (response.ok) {
+
+        dispatch(deletePlaceItem({ placeId: place._id}));
+
+        dispatch(
+          showSnackbar({
+            message: "Place deleted successfully.",
+            type: "success",
+          }),
+        );
+      } else {
+        dispatch(
+          showSnackbar({
+            message: "Failed to delete place.",
+            type: "error",
+          }),
+        );
+      }
     } catch {
       console.log("Failed to delete place.");
+      dispatch(
+        showSnackbar({
+          message: "Failed to delete place.",
+          type: "error",
+        }),
+      );
     } finally {
       setIsLoading(false);
     }
