@@ -47,7 +47,7 @@ export async function createPlace(place: CreatePlaceData) {
 }
 
 export async function deletePlace(placeId: string) {
-  
+
   try {
     const user = JSON.parse(localStorage.getItem("userData") ?? "null");
 
@@ -67,5 +67,48 @@ export async function deletePlace(placeId: string) {
   } catch (error) {
     console.log("Error while trying to delete place!");
     return { ok: false, message: error };
+  }
+}
+
+
+export interface UpdatePlaceDto {
+  title: string;
+  description: string;
+  address: string;
+  image: string;
+}
+
+export async function updatePlace(
+  placeId: string,
+  data: UpdatePlaceDto,
+) {
+  try {
+    const user = JSON.parse(localStorage.getItem("userData") ?? "null");
+
+    if (!user) {
+      throw new Error("User is not authenticated.");
+    }
+
+    const response = await api.patch(
+      `/places/${placeId}`,
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      }
+    );
+
+    return {
+      ok: true,
+      data: response.data,
+    };
+  } catch (error) {
+    console.log("Error while trying to update place!");
+
+    return {
+      ok: false,
+      message: error,
+    };
   }
 }

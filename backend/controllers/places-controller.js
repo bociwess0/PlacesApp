@@ -14,16 +14,16 @@ const getPlaceById = async (req, res, next) => {
     place = await Place.findById(placeId);
   } catch (err) {
     const error = new HttpError(
-      'Something went wrong, could not find a place.',
-      500
+      "Something went wrong, could not find a place.",
+      500,
     );
     return next(error);
   }
 
   if (!place) {
     const error = new HttpError(
-      'Could not find a place for the provided id.',
-      404
+      "Could not find a place for the provided id.",
+      404,
     );
     return next(error);
   }
@@ -123,10 +123,12 @@ const createPlace = async (req, res, next) => {
 };
 
 const updatePlace = async (req, res, next) => {
+  console.log("PATCH HIT");
+
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return next(
-      new HttpError('Invalid inputs passed, please check your data.', 422)
+      new HttpError("Invalid inputs passed, please check your data.", 422),
     );
   }
 
@@ -138,8 +140,8 @@ const updatePlace = async (req, res, next) => {
     place = await Place.findById(placeId);
   } catch (err) {
     const error = new HttpError(
-      'Something went wrong, could not update place.',
-      500
+      "Something went wrong, could not update place.",
+      500,
     );
     return next(error);
   }
@@ -151,8 +153,8 @@ const updatePlace = async (req, res, next) => {
     await place.save();
   } catch (err) {
     const error = new HttpError(
-      'Something went wrong, could not update place.',
-      500
+      "Something went wrong, could not update place.",
+      500,
     );
     return next(error);
   }

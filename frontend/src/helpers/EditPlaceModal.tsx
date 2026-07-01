@@ -2,33 +2,75 @@ import { X, Save } from "lucide-react";
 import { createPortal } from "react-dom";
 import { useState } from "react";
 import type { Place } from "../types";
+import { showSnackbar } from "../store/snackbarSlice";
+import { updatePlace } from "../auth/api/services/places";
+import { useDispatch } from "react-redux";
 
 interface Props {
     open: boolean;
     place: Place;
-    loading?: boolean;
     onClose: () => void;
-    onSave: (data: {
-        title: string;
-        description: string;
-        address: string;
-        image: string;
-    }) => void;
 }
 
 export default function EditPlaceModal({
     open,
     place,
-    loading = false,
     onClose,
-    onSave,
 }: Props) {
     const [title, setTitle] = useState(place.title);
     const [description, setDescription] = useState(place.description);
     const [address, setAddress] = useState(place.address);
     const [image, setImage] = useState(place.image);
 
+    const [isLoading, setIsLoading] = useState(false);
+
+    const dispatch = useDispatch();
+
     if (!open) return null;
+
+
+    const handleEdit = async (data: {
+        title: string;
+        description: string;
+        address: string;
+        image: string;
+    }) => {
+        setIsLoading(true);
+
+        try {
+            const response = await updatePlace(place._id, data);
+
+            if (response.ok) {
+
+                dispatch(
+                    showSnackbar({
+                        message: "Place updated successfully.",
+                        type: "success",
+                    }),
+                );
+
+                onClose();
+            } else {
+                dispatch(
+                    showSnackbar({
+                        message: "Failed to update place.",
+                        type: "error",
+                    }),
+                );
+            }
+        } catch {
+            console.log("Failed to update place.");
+
+            dispatch(
+                showSnackbar({
+                    message: "Failed to update place.",
+                    type: "error",
+                }),
+            );
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
     return createPortal(
         <>
@@ -129,18 +171,16 @@ export default function EditPlaceModal({
                         </button>
 
                         <button
-                            onClick={() =>
-                                onSave({
-                                    title,
-                                    description,
-                                    address,
-                                    image,
-                                })
-                            }
-                            disabled={loading}
+                            onClick={() => handleEdit({
+                                title,
+                                description,
+                                address,
+                                image,
+                            })}
+                            disabled={isLoading}
                             className="flex cursor-pointer items-center justify-center gap-2 rounded-xl bg-violet-600 px-6 py-3 font-semibold text-white transition hover:bg-violet-500 hover:shadow-lg hover:shadow-violet-500/30 disabled:cursor-not-allowed disabled:opacity-50"
                         >
-                            {loading ? (
+                            {isLoading ? (
                                 <div className="h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent" />
                             ) : (
                                 <>

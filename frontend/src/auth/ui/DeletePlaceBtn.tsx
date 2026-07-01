@@ -22,7 +22,6 @@ export default function DeletePlaceBtn({ place }: Props) {
   const handleDelete = async () => {
     setIsLoading(true);
 
-
     try {
 
       const response = await deletePlace(place._id);      

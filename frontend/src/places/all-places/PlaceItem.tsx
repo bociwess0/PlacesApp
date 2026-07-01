@@ -85,7 +85,6 @@ export default function PlaceItem({ place }: Props) {
         open = {openEditModal}
         place={place}
         onClose={() => setOpenEditModal(false)}
-        onSave={() => console.log(132)}
       />
     </div>
   );
