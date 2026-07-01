@@ -5,6 +5,7 @@ import type { Place } from "../types";
 import { showSnackbar } from "../store/snackbarSlice";
 import { updatePlace } from "../auth/api/services/places";
 import { useDispatch } from "react-redux";
+import { updatePlaceItem } from "../store/placesSlice";
 
 interface Props {
     open: boolean;
@@ -41,7 +42,12 @@ export default function EditPlaceModal({
             const response = await updatePlace(place._id, data);
 
             if (response.ok) {
-
+                dispatch(
+                    updatePlaceItem({
+                        placeId: place._id,
+                        ...data,
+                    }),
+                );
                 dispatch(
                     showSnackbar({
                         message: "Place updated successfully.",

@@ -22,7 +22,28 @@ const placesSlice = createSlice({
       state.searchTerm = action.payload;
     },
     deletePlaceItem: (state, action: PayloadAction<{ placeId: string }>) => {
-      state.places = state.places.filter((place: Place) => place._id != action.payload.placeId)
+      state.places = state.places.filter(
+        (place: Place) => place._id != action.payload.placeId,
+      );
+    },
+    updatePlaceItem: (
+      state,
+      action: PayloadAction<{
+        placeId: string;
+        title: string;
+        description: string;
+        address: string;
+        image: string;
+      }>,
+    ) => {
+      const place = state.places.find((p) => p._id === action.payload.placeId);
+
+      if (place) {
+        place.title = action.payload.title;
+        place.description = action.payload.description;
+        place.address = action.payload.address;
+        place.image = action.payload.image;
+      }
     },
   },
 });
@@ -32,5 +53,6 @@ const placesReducer = placesSlice.reducer;
 export const setPlaces = placesSlice.actions.setPlaces;
 export const setSearchTerm = placesSlice.actions.setSearchTerm;
 export const deletePlaceItem = placesSlice.actions.deletePlaceItem;
+export const updatePlaceItem = placesSlice.actions.updatePlaceItem;
 
 export default placesReducer;
