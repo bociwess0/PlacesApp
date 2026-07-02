@@ -23,12 +23,7 @@ export default function PlaceItem({ place }: Props) {
         <img
           src={place.image}
           alt={place.title}
-          className="
-            h-64
-            w-full
-            object-cover
-            transition-transform duration-500
-            group-hover:scale-105
+          className="h-64 w-full object-cover transition-transform duration-500 group-hover:scale-105
           "
         />
       </div>
@@ -50,16 +45,8 @@ export default function PlaceItem({ place }: Props) {
         {/* Actions */}
         <div className="mt-6 flex flex-wrap gap-3">
           <button
-            className="
-              flex items-center gap-2
-              rounded-xl
-              bg-violet-600
-              p-2
-              text-sm font-medium text-white
-              transition
-              hover:bg-violet-500
-              cursor-pointer
-            "
+            className=" flex items-center gap-2 rounded-xl  bg-violet-600 p-2 text-sm font-medium text-white transition
+              hover:bg-violet-500 cursor-pointer "
             onClick={() => setShowMap(true)}
           >
             <Map size={18} />
@@ -67,7 +54,7 @@ export default function PlaceItem({ place }: Props) {
           </button>
 
           <button
-          onClick={() => setOpenEditModal(true)}
+            onClick={() => setOpenEditModal(true)}
             className="
               flex items-center gap-2 rounded-xl border border-slate-700 px-4 py-3 text-sm font-medium text-slate-300
               transition  hover:border-slate-600  hover:text-white  cursor-pointer
@@ -81,8 +68,8 @@ export default function PlaceItem({ place }: Props) {
         </div>
       </div>
       {showMap && <PlacesMap place={place} onClose={() => setShowMap(false)} />}
-      <EditPlaceModal 
-        open = {openEditModal}
+      <EditPlaceModal
+        open={openEditModal}
         place={place}
         onClose={() => setOpenEditModal(false)}
       />

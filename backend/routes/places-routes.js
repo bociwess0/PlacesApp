@@ -26,9 +26,9 @@ router.get("/:pid", placesControllers.getPlaceById);
 router.patch(
   '/:pid',
   [
-    check('title')
-      .not()
-      .isEmpty(),
+    check('title').not().isEmpty(),
+    check('address').not().isEmpty(),
+    check('image').not().isEmpty(),
     check('description').isLength({ min: 5 })
   ],
   placesControllers.updatePlace

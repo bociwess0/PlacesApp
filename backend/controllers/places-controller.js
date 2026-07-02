@@ -132,7 +132,7 @@ const updatePlace = async (req, res, next) => {
     );
   }
 
-  const { title, description } = req.body;
+  const { title, description, image, address } = req.body;
   const placeId = req.params.pid;
 
   let place;
@@ -148,6 +148,9 @@ const updatePlace = async (req, res, next) => {
 
   place.title = title;
   place.description = description;
+  place.address = address;
+  place.image = image;
+
 
   try {
     await place.save();

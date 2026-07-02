@@ -6,6 +6,7 @@ import { showSnackbar } from "../store/snackbarSlice";
 import { updatePlace } from "../auth/api/services/places";
 import { useDispatch } from "react-redux";
 import { updatePlaceItem } from "../store/placesSlice";
+import ImageUpload from "../auth/ui/ImageUpload";
 
 interface Props {
     open: boolean;
@@ -152,20 +153,11 @@ export default function EditPlaceModal({
                             Image
                         </label>
 
-                        <input
+                        <ImageUpload
                             value={image}
-                            onChange={(e) => setImage(e.target.value)}
-                            className="w-full rounded-xl border border-slate-800 bg-slate-950/60 px-5 py-3.5 text-white outline-none transition placeholder:text-slate-500 focus:border-violet-500 focus:ring-2 focus:ring-violet-500/20"
+                            onChange={setImage}
                         />
-                        {image && (
-                            <div className="mt-5">
-                                <img
-                                    src={image}
-                                    alt={title}
-                                    className="h-44 w-full rounded-2xl border border-slate-800 object-cover"
-                                />
-                            </div>
-                        )}
+                
                     </div>
 
                     <div className="flex flex-col-reverse gap-3 border-t border-slate-800 pt-6 sm:flex-row sm:justify-end">
