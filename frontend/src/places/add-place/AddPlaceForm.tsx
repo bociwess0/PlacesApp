@@ -4,6 +4,7 @@ import { createPlace } from "../../auth/api/services/places";
 import type { RootState } from "../../store/store";
 import { useSelector } from "react-redux";
 import AuthRequired from "../../auth/components/AuthRequired";
+import ImageUpload from "../../auth/ui/ImageUpload";
 
 export default function AddPlaceForm() {
   const isAuthenticated = useSelector(
@@ -61,7 +62,7 @@ export default function AddPlaceForm() {
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="mt-8 space-y-6">
+      <form onSubmit={handleSubmit} className="mt-2 space-y-6">
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
           <div>
             <label
@@ -126,22 +127,11 @@ export default function AddPlaceForm() {
             Image
           </label>
 
-          <input
-            id="image"
-            type="text"
+          <ImageUpload
             value={image}
-            onChange={(e) => setImage(e.target.value)}
-            placeholder="/images/places/big-ben.webp"
-            className="w-full rounded-xl border border-slate-800 bg-slate-950/60 px-5 py-3.5 text-white outline-none transition placeholder:text-slate-500 focus:border-violet-500 focus:ring-2 focus:ring-violet-500/20"
+            onChange={setImage}
           />
 
-          <p className="mt-2 text-xs text-slate-500">
-            For now enter the image path from{" "}
-            <span className="font-medium text-violet-400">
-              /public/images/places
-            </span>
-            .
-          </p>
         </div>
 
         {error && (

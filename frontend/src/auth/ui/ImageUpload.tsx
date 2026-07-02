@@ -96,7 +96,7 @@ export default function ImageUpload({
                 <button
                     type="button"
                     onClick={handleClick}
-                    className="group flex w-full cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed border-slate-700 bg-slate-950/40 px-6 py-12 transition-all hover:border-violet-500 hover:bg-slate-900/60"
+                    className="group max-h-58 flex w-full cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed border-slate-700 bg-slate-950/40 px-6 py-12 transition-all hover:border-violet-500 hover:bg-slate-900/60"
                 >
                     {uploading ? (
                         <>
