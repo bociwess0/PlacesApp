@@ -69,7 +69,7 @@ export default function Places() {
 
   return (
     <div>
-      <h1 className="text-5xl font-bold text-white">Places</h1>
+      <h1 className="text-3xl md:text-5xl font-bold text-white">Places</h1>
       {filteredPlaces && filteredPlaces.length > 0 && (
         <PlacesList places={filteredPlaces} />
       )}

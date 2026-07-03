@@ -35,7 +35,7 @@ export default function Dashboard() {
           setIsSidebarOpen={setIsSidebarOpen}
         />
 
-        <div className="flex-6/7 p-5 overflow-y-auto">
+        <div className="flex-6/7 p-5 pb-15 overflow-y-auto">
           <main>
             <Outlet />
             <AppSnackbar />

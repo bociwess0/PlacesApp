@@ -54,8 +54,6 @@ export default function AddPlaceForm() {
   return (
     <div className="w-full max-w-5xl">
       <div className="pb-5">
-        <h1 className="text-3xl font-bold text-white md:text-4xl">Add Place</h1>
-
         <p className="mt-2 text-slate-400">
           Create a new destination and share your favorite places around the
           world.

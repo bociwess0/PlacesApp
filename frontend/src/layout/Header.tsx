@@ -1,10 +1,11 @@
-import { Bell, ChevronDown, Menu } from "lucide-react";
+import { Bell, Menu } from "lucide-react";
 import logo from "../assets/logo.svg";
 import SearchInput from "../components/SearchInput";
 import type { Dispatch, SetStateAction } from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import type { RootState } from "../store/store";
+import ProfileDropdown from "../components/ProfileDropdown";
 
 interface Props {
   isSidebarOpen: boolean;
@@ -16,26 +17,38 @@ export default function Header({ isSidebarOpen, setIsSidebarOpen }: Props) {
 
   return (
     <header className="sticky top-0 z-50 border-b border-slate-800 bg-[#040B1A]">
-      <div className="px-6 py-6 md:py-4 md:px-8">
+      <div className="px-6 py-4 md:py-4 md:px-8">
         {/* Mobile Header */}
-        <div className="relative flex items-center justify-between md:hidden">
+        <div className="flex w-full items-center justify-between gap-2 md:hidden">
           <button
+            type="button"
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            className="text-slate-300 transition hover:text-white"
+            className="shrink-0 cursor-pointer rounded-lg p-1 text-slate-300 transition hover:bg-slate-900 hover:text-white"
           >
             <Menu size={24} />
           </button>
 
           <NavLink
-            to={"/"}
-            className={"absolute left-1/2 h-14 -bottom-3 -translate-x-1/2"}
+            to="/"
+            className="min-w-0 flex-1"
           >
-            <img src={logo} alt="YourPlaces Logo" />
+            <img
+              src={logo}
+              alt="YourPlaces Logo"
+              className="h-auto w-40 max-w-full object-contain"
+            />
           </NavLink>
 
-          <button className="text-slate-300 transition hover:text-white">
-            <Bell size={24} />
-          </button>
+          <div className="flex shrink-0 items-center gap-1">
+            <button
+              type="button"
+              className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl text-slate-300 transition hover:bg-slate-900 hover:text-white"
+            >
+              <Bell size={22} />
+            </button>
+
+            <ProfileDropdown />
+          </div>
         </div>
 
         <div className="hidden items-center justify-between md:flex">
@@ -50,22 +63,14 @@ export default function Header({ isSidebarOpen, setIsSidebarOpen }: Props) {
               <Bell size={26} />
             </button>
 
-            <button className="flex items-center gap-3 rounded-2xl px-2 py-1 transition hover:bg-slate-900">
-              <img
-                src="/images/profile_image_1.png"
-                alt="Profile"
-                className="h-12 w-12 rounded-full object-cover"
-              />
-
-              <ChevronDown size={18} className="text-slate-400" />
-            </button>
+            <ProfileDropdown />
           </div>
         </div>
 
         {/* Mobile Search */}
 
         {places && places.length > 0 && (
-          <div className="mt-4 md:hidden">
+          <div className="mt-2 md:hidden">
             <SearchInput />
           </div>
         )}

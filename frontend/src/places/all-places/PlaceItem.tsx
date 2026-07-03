@@ -32,10 +32,10 @@ export default function PlaceItem({ place }: Props) {
       <div className="p-4">
         <h2 className="text-2xl font-bold text-white">{place.title}</h2>
 
-        <div className="mt-3 flex items-center gap-2 text-violet-400">
+        <div className="mt-3 flex items-start gap-2 text-violet-400">
           <MapPin size={18} />
 
-          <span className="text-sm">
+          <span className="text-sm h-10">
             {place.address}
           </span>
         </div>
@@ -46,15 +46,16 @@ export default function PlaceItem({ place }: Props) {
         <div className="mt-6 flex flex-wrap gap-3">
           <button
             className=" flex items-center gap-2 rounded-xl  bg-violet-600 p-2 text-sm font-medium text-white transition
-              hover:bg-violet-500 cursor-pointer "
+              hover:bg-violet-500 cursor-pointer
+            "
             onClick={() => setShowMap(true)}
           >
             <Map size={18} />
-            View Map
+            Map
           </button>
 
           <button
-            onClick={() => setOpenEditModal(true)}
+          onClick={() => setOpenEditModal(true)}
             className="
               flex items-center gap-2 rounded-xl border border-slate-700 px-4 py-3 text-sm font-medium text-slate-300
               transition  hover:border-slate-600  hover:text-white  cursor-pointer
@@ -68,8 +69,8 @@ export default function PlaceItem({ place }: Props) {
         </div>
       </div>
       {showMap && <PlacesMap place={place} onClose={() => setShowMap(false)} />}
-      <EditPlaceModal
-        open={openEditModal}
+      <EditPlaceModal 
+        open = {openEditModal}
         place={place}
         onClose={() => setOpenEditModal(false)}
       />
