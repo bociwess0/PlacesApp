@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import type { RootState } from "../store/store";
 import ProfileDropdown from "../components/ProfileDropdown";
+import NotificationsDropdown from "../components/NotificationsDropdown";
 
 interface Props {
   isSidebarOpen: boolean;
@@ -40,12 +41,7 @@ export default function Header({ isSidebarOpen, setIsSidebarOpen }: Props) {
           </NavLink>
 
           <div className="flex shrink-0 items-center gap-1">
-            <button
-              type="button"
-              className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl text-slate-300 transition hover:bg-slate-900 hover:text-white"
-            >
-              <Bell size={22} />
-            </button>
+            <NotificationsDropdown />
 
             <ProfileDropdown />
           </div>
@@ -59,9 +55,7 @@ export default function Header({ isSidebarOpen, setIsSidebarOpen }: Props) {
           <div className="flex items-center gap-8">
             {places && places.length > 0 && <SearchInput />}
 
-            <button className="text-slate-300 transition hover:text-white">
-              <Bell size={26} />
-            </button>
+            <NotificationsDropdown />
 
             <ProfileDropdown />
           </div>
