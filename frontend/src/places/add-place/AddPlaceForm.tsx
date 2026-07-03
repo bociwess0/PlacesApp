@@ -2,9 +2,11 @@ import { PlusCircle } from "lucide-react";
 import { useState } from "react";
 import { createPlace } from "../../auth/api/services/places";
 import type { RootState } from "../../store/store";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AuthRequired from "../../auth/components/AuthRequired";
 import ImageUpload from "../../auth/ui/ImageUpload";
+import { addNotification } from "../../store/notificationSlice";
+import type { Place } from "../../types";
 
 export default function AddPlaceForm() {
   const isAuthenticated = useSelector(
@@ -18,6 +20,8 @@ export default function AddPlaceForm() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const dispatch = useDispatch();
+
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -27,21 +31,41 @@ export default function AddPlaceForm() {
     setSuccess("");
 
     try {
-      await createPlace({
+      const place:Place = await createPlace({
         title,
         description,
         address,
         image,
       });
 
+      console.log(place);
+      
+
       setTitle("");
       setDescription("");
       setAddress("");
       setImage("");
 
+
+      dispatch(
+        addNotification({
+          title: "Place added",
+          message: `"${place.title}" has been added successfully.`,
+          type: "success",
+        }),
+      );
+
+
       setSuccess("Your place has been created successfully!");
     } catch {
       setError("Failed to create place.");
+      dispatch(
+        addNotification({
+          title: "Error while trying to add place!",
+          message: `Place has not been added.`,
+          type: "error",
+        }),
+      );
     } finally {
       setLoading(false);
     }

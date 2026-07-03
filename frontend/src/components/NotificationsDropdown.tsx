@@ -6,49 +6,22 @@ import {
     Pencil,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import type { RootState } from "../store/store";
+import { markAllNotificationsAsRead, markNotificationAsRead, type NotificationType } from "../store/notificationSlice";
+import { formatNotificationTime } from "../utils/util-actions";
 
-interface Notification {
-    id: string;
-    title: string;
-    message: string;
-    time: string;
-    type: "success" | "update" | "welcome";
-    read: boolean;
-}
-
-const initialNotifications: Notification[] = [
-    {
-        id: "1",
-        title: "Place added successfully",
-        message: 'New place "Eiffel Tower" has been added.',
-        time: "2 minutes ago",
-        type: "success",
-        read: false,
-    },
-    {
-        id: "2",
-        title: "Place updated",
-        message: '"Tokyo Tower" has been updated.',
-        time: "15 minutes ago",
-        type: "update",
-        read: false,
-    },
-    {
-        id: "3",
-        title: "Welcome back!",
-        message: "We're happy to see you again.",
-        time: "1 hour ago",
-        type: "welcome",
-        read: true,
-    },
-];
 
 export default function NotificationsDropdown() {
     const [isOpen, setIsOpen] = useState(false);
-    const [notifications, setNotifications] =
-        useState<Notification[]>(initialNotifications);
 
     const dropdownRef = useRef<HTMLDivElement>(null);
+
+    const dispatch = useDispatch();
+
+    const notifications = useSelector(
+        (state: RootState) => state.notificationAction.notifications,
+    );
 
     const unreadCount = notifications.filter(
         (notification) => !notification.read,
@@ -72,25 +45,18 @@ export default function NotificationsDropdown() {
     }, []);
 
     const handleMarkAllAsRead = () => {
-        setNotifications((prev) =>
-            prev.map((notification) => ({
-                ...notification,
-                read: true,
-            })),
-        );
+        dispatch(markAllNotificationsAsRead());
     };
 
     const handleNotificationClick = (id: string) => {
-        setNotifications((prev) =>
-            prev.map((notification) =>
-                notification.id === id
-                    ? { ...notification, read: true }
-                    : notification,
-            ),
+        dispatch(
+            markNotificationAsRead({
+                notificationId: id,
+            }),
         );
     };
 
-    const getNotificationIcon = (type: Notification["type"]) => {
+    const getNotificationIcon = (type: NotificationType) => {
         if (type === "success") {
             return (
                 <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-emerald-500/15 text-emerald-400">
@@ -103,6 +69,14 @@ export default function NotificationsDropdown() {
             return (
                 <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-blue-500/15 text-blue-400">
                     <Pencil size={20} />
+                </div>
+            );
+        }
+
+        if (type === "error") {
+            return (
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-red-500/15 text-red-400">
+                    <Bell size={20} />
                 </div>
             );
         }
@@ -189,7 +163,7 @@ export default function NotificationsDropdown() {
                                         </p>
 
                                         <p className="mt-2 text-xs text-slate-500">
-                                            {notification.time}
+                                            {formatNotificationTime(notification.createdAt)}
                                         </p>
                                     </div>
                                 </button>

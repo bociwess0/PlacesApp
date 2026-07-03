@@ -7,6 +7,7 @@ import { updatePlace } from "../auth/api/services/places";
 import { useDispatch } from "react-redux";
 import { updatePlaceItem } from "../store/placesSlice";
 import ImageUpload from "../auth/ui/ImageUpload";
+import { addNotification } from "../store/notificationSlice";
 
 interface Props {
     open: boolean;
@@ -49,6 +50,15 @@ export default function EditPlaceModal({
                         ...data,
                     }),
                 );
+
+                dispatch(
+                    addNotification({
+                        title: "Place edited!",
+                        message: `"${place.title}" has been edited successfully.`,
+                        type: "update",
+                    }),
+                );
+
                 dispatch(
                     showSnackbar({
                         message: "Place updated successfully.",
@@ -59,6 +69,13 @@ export default function EditPlaceModal({
                 onClose();
             } else {
                 dispatch(
+                    addNotification({
+                        title: "Error while trying to edit place!",
+                        message: `"${place.title}" has not been edited.`,
+                        type: "error",
+                    }),
+                );
+                dispatch(
                     showSnackbar({
                         message: "Failed to update place.",
                         type: "error",
@@ -67,6 +84,14 @@ export default function EditPlaceModal({
             }
         } catch {
             console.log("Failed to update place.");
+
+            dispatch(
+                addNotification({
+                    title: "Error while trying to edit place!",
+                    message: `"${place.title}" has not been edited.`,
+                    type: "error",
+                }),
+            );
 
             dispatch(
                 showSnackbar({
@@ -157,7 +182,7 @@ export default function EditPlaceModal({
                             value={image}
                             onChange={setImage}
                         />
-                
+
                     </div>
 
                     <div className="flex flex-col-reverse gap-3 border-t border-slate-800 pt-6 sm:flex-row sm:justify-end">

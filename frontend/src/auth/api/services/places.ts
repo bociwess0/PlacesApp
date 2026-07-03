@@ -39,7 +39,7 @@ export async function createPlace(place: CreatePlaceData) {
       },
     );
 
-    return response.data;
+    return response.data.place;
   } catch (error) {
     console.log("Error creating place!");
     throw error;
