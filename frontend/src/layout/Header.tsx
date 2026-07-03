@@ -1,4 +1,4 @@
-import { Bell, Menu } from "lucide-react";
+import { Menu } from "lucide-react";
 import logo from "../assets/logo.svg";
 import SearchInput from "../components/SearchInput";
 import type { Dispatch, SetStateAction } from "react";
