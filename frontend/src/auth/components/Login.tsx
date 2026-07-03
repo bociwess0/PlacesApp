@@ -7,6 +7,7 @@ import LoginBtn from "../ui/LoginBtn";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../store/userSlice";
 import { useNavigate } from "react-router-dom";
+import { addNotification } from "../../store/notificationSlice";
 
 interface Props {
   onSwitchToRegister: () => void;
@@ -45,21 +46,29 @@ export default function Login({ onSwitchToRegister }: Props) {
         new Date(new Date().getDate() + 1000 * 60 * 60);
 
       const userLoggedIn = JSON.stringify({
-          userId: response.user,
-          token: response.token,
-          email: response.email,
-          name: response.name,
-          expiration: tokenExpirationDate.toISOString(),
-        })
+        userId: response.user,
+        token: response.token,
+        email: response.email,
+        name: response.name,
+        expiration: tokenExpirationDate.toISOString(),
+      })
 
       localStorage.setItem(
         "userData",
         userLoggedIn
       );
 
-      dispatch(loginUser({userId: response.user, email: response.email, name: response.name, token: response.token}))
+      dispatch(loginUser({ userId: response.user, email: response.email, name: response.name, token: response.token }))
 
       navigate("/places")
+
+      dispatch(
+        addNotification({
+          title: "Welcome back",
+          message: "We are happy to see you again!",
+          type: "welcome",
+        }),
+      );
 
     } catch (err: unknown) {
       if (axios.isAxiosError<ErrorResponse>(err)) {
