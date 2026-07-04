@@ -15,7 +15,7 @@ export default function Auth() {
             <br />
             Explore.
             <br />
-            <span className="text-violet-500">Remember.</span>
+            <span className="text-blue-500">Remember.</span>
           </h1>
 
           <p className="mt-8 max-w-xl text-2xl text-slate-400">
@@ -26,7 +26,6 @@ export default function Auth() {
             <button
               className="
                 rounded-2xl
-                bg-blue-600
                 px-8
                 py-4
                 text-lg
@@ -68,7 +67,7 @@ export default function Auth() {
 
           <div className="mt-16 flex flex-wrap gap-10">
             <div className="flex gap-3">
-              <MapPin size={24} className="text-violet-500" />
+              <MapPin size={24} className="text-blue-500" />
 
               <div>
                 <h3 className="font-semibold text-white">Save Places</h3>
@@ -78,7 +77,7 @@ export default function Auth() {
             </div>
 
             <div className="flex gap-3">
-              <Globe size={24} className="text-violet-500" />
+              <Globe size={24} className="text-blue-500" />
 
               <div>
                 <h3 className="font-semibold text-white">View on Map</h3>
@@ -88,7 +87,7 @@ export default function Auth() {
             </div>
 
             <div className="flex gap-3">
-              <Pencil size={24} className="text-violet-500" />
+              <Pencil size={24} className="text-blue-500" />
 
               <div>
                 <h3 className="font-semibold text-white">Easy to Manage</h3>
