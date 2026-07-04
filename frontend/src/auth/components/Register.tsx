@@ -77,13 +77,13 @@ export default function Register({ onSwitchToLogin }: Props) {
               className="
                 w-full
                 rounded-xl
-                border border-slate-800
+                border border-[#1D3A5F]
                 bg-slate-950/50
                 py-4 pl-12 pr-4
                 text-white
                 outline-none
                 transition
-                focus:border-violet-500
+                focus:border-blue-500
               "
             />
           </div>
@@ -105,13 +105,13 @@ export default function Register({ onSwitchToLogin }: Props) {
               className="
                 w-full
                 rounded-xl
-                border border-slate-800
+                border border-[#1D3A5F]
                 bg-slate-950/50
                 py-4 pl-12 pr-4
                 text-white
                 outline-none
                 transition
-                focus:border-violet-500
+                focus:border-blue-500
               "
             />
           </div>
@@ -133,13 +133,13 @@ export default function Register({ onSwitchToLogin }: Props) {
               className="
                 w-full
                 rounded-xl
-                border border-slate-800
+                border border-[#1D3A5F]
                 bg-slate-950/50
                 py-4 pl-12 pr-4
                 text-white
                 outline-none
                 transition
-                focus:border-violet-500
+                focus:border-blue-500
               "
             />
           </div>
@@ -153,7 +153,7 @@ export default function Register({ onSwitchToLogin }: Props) {
         Already have an account?{" "}
         <button
           onClick={onSwitchToLogin}
-          className="text-violet-400 hover:text-violet-300"
+          className="text-blue-400 hover:text-blue-300"
         >
           Login
         </button>

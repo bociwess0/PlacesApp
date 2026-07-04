@@ -13,12 +13,12 @@ export default function LoginBtn({isLoading}: Props) {
     w-full
     items-center
     justify-center
-            bg-violet-600
+            bg-blue-600
             py-4
             font-semibold
             text-white
             transition
-            hover:bg-violet-500
+            bg-blue-600
 
                 disabled:cursor-not-allowed
     disabled:opacity-60

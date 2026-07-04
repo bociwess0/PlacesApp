@@ -27,7 +27,7 @@ export default function ConfirmModal({
         onClick={onClose}
       />
 
-      <div className="fixed left-1/2 top-1/2 z-50 w-[95vw] max-w-md -translate-x-1/2 -translate-y-1/2 rounded-3xl border border-slate-800 bg-[#040B1A] p-8 shadow-2xl">
+      <div className="fixed left-1/2 top-1/2 z-50 w-[95vw] max-w-md -translate-x-1/2 -translate-y-1/2 rounded-3xl border border-[#1D3A5F] bg-[#06152B] p-8 shadow-2xl">
         <button
           onClick={onClose}
           className="absolute right-5 top-5 text-slate-400 transition hover:text-white"
@@ -40,7 +40,7 @@ export default function ConfirmModal({
             className={`mb-6 flex h-20 w-20 items-center justify-center rounded-full ${
               variant === "danger"
                 ? "bg-red-500/10"
-                : "bg-violet-500/10"
+                : "bg-blue-500/10"
             }`}
           >
             <AlertTriangle
@@ -48,7 +48,7 @@ export default function ConfirmModal({
               className={
                 variant === "danger"
                   ? "text-red-400"
-                  : "text-violet-400"
+                  : "text-blue-400"
               }
             />
           </div>
@@ -64,7 +64,7 @@ export default function ConfirmModal({
           <div className="mt-8 flex w-full gap-4">
             <button
               onClick={onClose}
-              className="cursor-pointer flex-1 rounded-xl border border-slate-700 px-4 py-3 font-medium text-white transition hover:border-slate-600"
+              className="cursor-pointer flex-1 rounded-xl border border-[#294C73] px-4 py-3 font-medium text-white transition hover:border-slate-600"
             >
               {cancelText}
             </button>
@@ -77,7 +77,7 @@ export default function ConfirmModal({
               className={`cursor-pointer flex-1 rounded-xl px-4 py-3 font-medium text-white transition ${
                 variant === "danger"
                   ? "bg-red-600 hover:bg-red-500"
-                  : "bg-violet-600 hover:bg-violet-500"
+                  : "bg-blue-600"
               }`}
             >
               {confirmText}

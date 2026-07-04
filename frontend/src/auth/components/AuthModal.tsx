@@ -43,8 +43,8 @@ export default function AuthModal({
           -translate-y-1/2
 
           rounded-3xl
-          border border-slate-800
-          bg-[#040B1A]
+          border border-[#1D3A5F]
+          bg-[#06152B]
 
           p-8
 

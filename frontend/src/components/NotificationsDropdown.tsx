@@ -82,7 +82,7 @@ export default function NotificationsDropdown() {
         }
 
         return (
-            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-violet-500/15 text-violet-400">
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-blue-500/15 text-blue-400">
                 <Heart size={21} />
             </div>
         );
@@ -98,15 +98,15 @@ export default function NotificationsDropdown() {
                 <Bell size={22} />
 
                 {unreadCount > 0 && (
-                    <span className="absolute right-0 top-0 flex h-5 min-w-5 items-center justify-center rounded-full bg-violet-600 px-1 text-[11px] font-bold text-white ring-2 ring-[#020817]">
+                    <span className="absolute right-0 top-0 flex h-5 min-w-5 items-center justify-center rounded-full bg-blue-600 px-1 text-[11px] font-bold text-white ring-2 ring-[#020B1C]">
                         {unreadCount}
                     </span>
                 )}
             </button>
 
             {isOpen && (
-                <div className="absolute -right-25 md:right-0 top-[calc(100%+12px)] z-100 w-[calc(100vw-2rem)] max-w-md overflow-hidden rounded-2xl border border-slate-800 bg-[#07101f] shadow-2xl shadow-black/40 sm:w-105">
-                    <div className="flex items-center justify-between gap-4 border-b border-slate-800 px-5 py-4">
+                <div className="absolute -right-25 md:right-0 top-[calc(100%+12px)] z-100 w-[calc(100vw-2rem)] max-w-md overflow-hidden rounded-2xl border border-[#1D3A5F] bg-[#07101f] shadow-2xl shadow-black/40 sm:w-105">
+                    <div className="flex items-center justify-between gap-4 border-b border-[#1D3A5F] px-5 py-4">
                         <div>
                             <h3 className="text-lg font-bold text-white">
                                 Notifications
@@ -123,7 +123,7 @@ export default function NotificationsDropdown() {
                             <button
                                 type="button"
                                 onClick={handleMarkAllAsRead}
-                                className="flex shrink-0 cursor-pointer items-center gap-1.5 text-sm font-medium text-violet-400 transition hover:text-violet-300"
+                                className="flex shrink-0 cursor-pointer items-center gap-1.5 text-sm font-medium text-blue-400 transition hover:text-blue-300"
                             >
                                 <CheckCheck size={17} />
                                 <span className="hidden sm:inline">
@@ -142,7 +142,7 @@ export default function NotificationsDropdown() {
                                     onClick={() =>
                                         handleNotificationClick(notification.id)
                                     }
-                                    className={`relative flex w-full cursor-pointer gap-4 border-b border-slate-800/70 px-5 py-4 text-left transition last:border-b-0 hover:bg-slate-800/40 ${!notification.read ? "bg-violet-500/4" : ""
+                                    className={`relative flex w-full cursor-pointer gap-4 border-b border-[#1D3A5F]/70 px-5 py-4 text-left transition last:border-b-0 hover:bg-slate-800/40 ${!notification.read ? "bg-blue-500/4" : ""
                                         }`}
                                 >
                                     {getNotificationIcon(notification.type)}
@@ -154,7 +154,7 @@ export default function NotificationsDropdown() {
                                             </p>
 
                                             {!notification.read && (
-                                                <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-violet-500" />
+                                                <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-blue-500" />
                                             )}
                                         </div>
 

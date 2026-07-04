@@ -96,13 +96,13 @@ export default function ImageUpload({
                 <button
                     type="button"
                     onClick={handleClick}
-                    className="group max-h-58 flex w-full cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed border-slate-700 bg-slate-950/40 px-6 py-12 transition-all hover:border-violet-500 hover:bg-slate-900/60"
+                    className="group max-h-58 flex w-full cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed border-[#294C73] bg-slate-950/40 px-6 py-12 transition-all hover:border-blue-500 hover:bg-slate-900/60"
                 >
                     {uploading ? (
                         <>
                             <Loader2
                                 size={46}
-                                className="animate-spin text-violet-400"
+                                className="animate-spin text-blue-400"
                             />
 
                             <p className="mt-5 font-semibold text-white">
@@ -113,7 +113,7 @@ export default function ImageUpload({
                         <>
                             <ImagePlus
                                 size={52}
-                                className="text-slate-400 transition group-hover:text-violet-400"
+                                className="text-slate-400 transition group-hover:text-blue-400"
                             />
 
                             <h3 className="mt-5 text-lg font-semibold text-white">
@@ -131,18 +131,18 @@ export default function ImageUpload({
                     )}
                 </button>
             ) : (
-                <div className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-950/40">
+                <div className="overflow-hidden rounded-2xl border border-[#1D3A5F] bg-slate-950/40">
                     <img
                         src={preview}
                         alt="Preview"
                         className="h-64 w-full object-cover"
                     />
 
-                    <div className="flex flex-col gap-3 border-t border-slate-800 p-4 sm:flex-row">
+                    <div className="flex flex-col gap-3 border-t border-[#1D3A5F] p-4 sm:flex-row">
                         <button
                             type="button"
                             onClick={handleClick}
-                            className="flex flex-1 cursor-pointer items-center justify-center rounded-xl border border-slate-700 px-4 py-3 font-medium text-white transition hover:border-violet-500 hover:text-violet-400"
+                            className="flex flex-1 cursor-pointer items-center justify-center rounded-xl border border-[#294C73] px-4 py-3 font-medium text-white transition hover:border-blue-500 hover:text-blue-400"
                         >
                             Change image
                         </button>

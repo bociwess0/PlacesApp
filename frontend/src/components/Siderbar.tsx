@@ -32,13 +32,13 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }: Props) {
   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
     `flex items-center gap-3 rounded-xl px-4 py-3 transition ${
       isActive
-        ? "bg-violet-600 text-white"
+        ? "bg-blue-600 text-white"
         : "text-slate-300 hover:bg-slate-800 hover:text-white"
     }`;
 
   return (
     <div
-      className={`fixed left-0 ${sidebarTop} md:top-30 z-50 flex ${sidebarHeight} w-64 flex-col border-r border-slate-800 bg-slate-950 transition-transform duration-300 ease-in-out md:h-[calc(100vh-100px)] ${
+      className={`fixed left-0 ${sidebarTop} md:top-30 z-50 flex ${sidebarHeight} w-64 flex-col border-r border-[#1D3A5F] bg-slate-950 transition-transform duration-300 ease-in-out md:h-[calc(100vh-100px)] ${
         isSidebarOpen ? "translate-x-0" : "-translate-x-full"
       } lg:static lg:w-1/7 lg:translate-x-0`}
     >
@@ -63,7 +63,7 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }: Props) {
       </nav>
 
       {isAuthenticated && (
-        <div className="border-t border-slate-800 p-4">
+        <div className="border-t border-[#1D3A5F] p-4">
           <button
             onClick={() => setShowLogoutModal(true)}
             className="flex w-full cursor-pointer items-center gap-3 rounded-xl px-4 py-3 text-red-400 transition hover:bg-red-500/10"

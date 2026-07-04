@@ -15,8 +15,8 @@ export default function PlaceItem({ place }: Props) {
 
   return (
     <div
-      className="group flex-1 min-w-80 md:min-w-87.5 max-w-93  overflow-hidden rounded-3xl border border-slate-800 bg-slate-950/40
-                    transition-all duration-300  hover:border-violet-500/50"
+      className="group flex-1 min-w-80 md:min-w-87.5 max-w-93  overflow-hidden rounded-3xl border border-[#1D3A5F] bg-slate-950/40
+                    transition-all duration-300  hover:border-blue-500/50"
     >
       {/* Image */}
       <div className="overflow-hidden">
@@ -32,7 +32,7 @@ export default function PlaceItem({ place }: Props) {
       <div className="p-4">
         <h2 className="text-2xl font-bold text-white">{place.title}</h2>
 
-        <div className="mt-3 flex items-start gap-2 text-violet-400">
+        <div className="mt-3 flex items-start gap-2 text-blue-400">
           <MapPin size={18} />
 
           <span className="text-sm h-10">
@@ -45,8 +45,8 @@ export default function PlaceItem({ place }: Props) {
         {/* Actions */}
         <div className="mt-6 flex flex-wrap gap-3">
           <button
-            className=" flex items-center gap-2 rounded-xl  bg-violet-600 p-2 text-sm font-medium text-white transition
-              hover:bg-violet-500 cursor-pointer
+            className=" flex items-center gap-2 rounded-xl  bg-blue-600 p-2 text-sm font-medium text-white transition
+              bg-blue-600 cursor-pointer
             "
             onClick={() => setShowMap(true)}
           >
@@ -57,7 +57,7 @@ export default function PlaceItem({ place }: Props) {
           <button
           onClick={() => setOpenEditModal(true)}
             className="
-              flex items-center gap-2 rounded-xl border border-slate-700 px-4 py-3 text-sm font-medium text-slate-300
+              flex items-center gap-2 rounded-xl border border-[#294C73] px-4 py-3 text-sm font-medium text-slate-300
               transition  hover:border-slate-600  hover:text-white  cursor-pointer
             "
           >

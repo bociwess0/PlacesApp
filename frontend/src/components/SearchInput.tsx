@@ -26,7 +26,7 @@ export default function SearchInput() {
 
           rounded-2xl
           border
-          border-slate-800
+          border-[#1D3A5F]
 
           bg-slate-950/50
 
@@ -36,9 +36,9 @@ export default function SearchInput() {
           text-white
           placeholder:text-slate-500
 
-          focus:border-violet-500/50
+          focus:border-blue-500/50
           focus:ring-2
-          focus:ring-violet-500/20
+          focus:ring-blue-500/20
           outline-none
         "
       />

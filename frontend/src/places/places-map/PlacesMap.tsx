@@ -40,8 +40,8 @@ export default function PlacesMap({ place, onClose }: Props) {
     overflow-y-auto
 
     rounded-3xl
-    border border-slate-800
-    bg-[#040B1A]
+    border border-[#1D3A5F]
+    bg-[#06152B]
 
     shadow-2xl
         "
@@ -50,7 +50,7 @@ export default function PlacesMap({ place, onClose }: Props) {
         <div
           className="
             flex items-center justify-between
-            border-b border-slate-800
+            border-b border-[#1D3A5F]
             p-6
           "
         >
@@ -92,7 +92,7 @@ export default function PlacesMap({ place, onClose }: Props) {
 
             <div className="mt-6 space-y-5">
               <div className="flex items-start gap-3">
-                <MapPin size={20} className="mt-0.5 text-violet-400" />
+                <MapPin size={20} className="mt-0.5 text-blue-400" />
 
                 <div>
                   <p className="text-slate-300">{place.address}</p>
@@ -100,13 +100,13 @@ export default function PlacesMap({ place, onClose }: Props) {
               </div>
 
               <div className="flex items-start gap-3">
-                <FileText size={20} className="mt-0.5 text-violet-400" />
+                <FileText size={20} className="mt-0.5 text-blue-400" />
 
                 <p className="text-slate-400">{place.description}</p>
               </div>
 
               <div className="flex items-start gap-3">
-                <Compass size={20} className="mt-0.5 text-violet-400" />
+                <Compass size={20} className="mt-0.5 text-blue-400" />
 
                 <div className="text-slate-500">
                   <p>Latitude: {place.location.lat}</p>
@@ -118,7 +118,7 @@ export default function PlacesMap({ place, onClose }: Props) {
 
           {/* Map */}
           <div className="lg:w-2/3">
-            <div className="overflow-hidden max-h-80 md:max-h-none rounded-2xl border border-slate-800">
+            <div className="overflow-hidden max-h-80 md:max-h-none rounded-2xl border border-[#1D3A5F]">
               <iframe
                 title={place.title}
                 width="100%"

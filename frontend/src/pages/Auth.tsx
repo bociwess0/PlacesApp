@@ -26,14 +26,14 @@ export default function Auth() {
             <button
               className="
                 rounded-2xl
-                bg-violet-600
+                bg-blue-600
                 px-8
                 py-4
                 text-lg
                 font-semibold
                 text-white
                 transition
-                hover:bg-violet-500
+                bg-blue-600
                 cursor-pointer
               "
               onClick={() => {
@@ -47,14 +47,14 @@ export default function Auth() {
             <button
               className="
                 rounded-2xl
-                border border-slate-700
+                border border-[#294C73]
                 px-8
                 py-4
                 text-lg
                 font-semibold
                 text-white
                 transition
-                hover:border-violet-500
+                hover:border-blue-500
                 cursor-pointer
               "
               onClick={() => {

@@ -79,8 +79,8 @@ export default function ProfileDropdown() {
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 top-[calc(100%+12px)] z-100 w-[calc(100vw-2rem)] max-w-sm overflow-hidden rounded-2xl border border-slate-800 bg-[#07101f] shadow-2xl shadow-black/40 sm:w-80">
-          <div className="flex items-center gap-4 border-b border-slate-800 p-5">
+        <div className="absolute right-0 top-[calc(100%+12px)] z-100 w-[calc(100vw-2rem)] max-w-sm overflow-hidden rounded-2xl border border-[#1D3A5F] bg-[#07101f] shadow-2xl shadow-black/40 sm:w-80">
+          <div className="flex items-center gap-4 border-b border-[#1D3A5F] p-5">
             <img
               src="/images/profile_image_1.png"
               alt={user.name}
@@ -109,7 +109,7 @@ export default function ProfileDropdown() {
             </button>
           </div>
 
-          <div className="border-t border-slate-800 p-2">
+          <div className="border-t border-[#1D3A5F] p-2">
             <button
               type="button"
               onClick={handleLogout}

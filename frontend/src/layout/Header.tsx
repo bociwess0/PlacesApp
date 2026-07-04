@@ -17,7 +17,7 @@ export default function Header({ isSidebarOpen, setIsSidebarOpen }: Props) {
   const places = useSelector((state: RootState) => state.placesAction.places);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-800 bg-[#040B1A]">
+    <header className="sticky top-0 z-50 border-b border-[#1D3A5F] bg-[#06152B]">
       <div className="px-6 py-4 md:py-4 md:px-8">
         {/* Mobile Header */}
         <div className="flex w-full items-center justify-between gap-2 md:hidden">

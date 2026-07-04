@@ -100,7 +100,7 @@ export default function AddPlaceForm() {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Empire State Building"
-              className="w-full rounded-xl border border-slate-800 bg-slate-950/60 px-5 py-3.5 text-white outline-none transition placeholder:text-slate-500 focus:border-violet-500 focus:ring-2 focus:ring-violet-500/20"
+              className="w-full rounded-xl border border-[#1D3A5F] bg-slate-950/60 px-5 py-3.5 text-white outline-none transition placeholder:text-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
             />
           </div>
 
@@ -118,7 +118,7 @@ export default function AddPlaceForm() {
               value={address}
               onChange={(e) => setAddress(e.target.value)}
               placeholder="New York, USA"
-              className="w-full rounded-xl border border-slate-800 bg-slate-950/60 px-5 py-3.5 text-white outline-none transition placeholder:text-slate-500 focus:border-violet-500 focus:ring-2 focus:ring-violet-500/20"
+              className="w-full rounded-xl border border-[#1D3A5F] bg-slate-950/60 px-5 py-3.5 text-white outline-none transition placeholder:text-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
             />
           </div>
         </div>
@@ -137,7 +137,7 @@ export default function AddPlaceForm() {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Tell us something interesting about this place... (minimum 6 letter word)"
-            className="w-full resize-none rounded-xl border border-slate-800 bg-slate-950/60 px-5 py-3.5 text-white outline-none transition placeholder:text-slate-500 focus:border-violet-500 focus:ring-2 focus:ring-violet-500/20"
+            className="w-full resize-none rounded-xl border border-[#1D3A5F] bg-slate-950/60 px-5 py-3.5 text-white outline-none transition placeholder:text-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
           />
         </div>
 
@@ -183,11 +183,11 @@ export default function AddPlaceForm() {
           </div>
         )}
 
-        <div className="flex flex-col-reverse gap-3 border-t border-slate-800 pt-5 sm:flex-row sm:justify-end">
+        <div className="flex flex-col-reverse gap-3 border-t border-[#1D3A5F] pt-5 sm:flex-row sm:justify-end">
           <button
             type="submit"
             disabled={loading}
-            className="flex cursor-pointer items-center justify-center gap-2 rounded-xl bg-violet-600 px-6 py-3 font-semibold text-white transition hover:bg-violet-500 hover:shadow-lg hover:shadow-violet-500/30 disabled:cursor-not-allowed disabled:opacity-50"
+            className="flex cursor-pointer items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white transition bg-blue-600 hover:shadow-lg hover:shadow-blue-500/30 disabled:cursor-not-allowed disabled:opacity-50"
           >
             <PlusCircle size={18} />
             <span>{loading ? "Creating..." : "Add Place"}</span>

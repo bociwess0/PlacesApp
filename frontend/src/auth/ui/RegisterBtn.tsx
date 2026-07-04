@@ -14,7 +14,7 @@ export default function RegisterBtn({ isLoading }: Props) {
     justify-center
 
     rounded-xl
-    bg-violet-600
+    bg-blue-600
 
     py-4
 
@@ -23,7 +23,7 @@ export default function RegisterBtn({ isLoading }: Props) {
 
     transition
 
-    hover:bg-violet-500
+    bg-blue-600
 
     disabled:cursor-not-allowed
     disabled:opacity-60

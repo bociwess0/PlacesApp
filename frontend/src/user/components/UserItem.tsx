@@ -13,13 +13,13 @@ export default function UserItem({ user }: Props) {
     flex flex-col items-center
     flex-1 md:flex-[1/5]  min-w-70 md:max-w-70
     rounded-3xl
-    border border-slate-800
+    border border-[#1D3A5F]
     bg-slate-950/40
     p-8
     relative
     overflow-hidden
     transition-all duration-300
-    hover:border-violet-500/50
+    hover:border-blue-500/50
     cursor-pointer
   "
     >
@@ -50,7 +50,7 @@ export default function UserItem({ user }: Props) {
       <div
         className={`
       mt-4 flex items-center gap-2 font-medium relative z-10
-      ${user.places > 0 ? "text-violet-400" : "text-slate-300"}
+      ${user.places > 0 ? "text-blue-400" : "text-slate-300"}
     `}
       >
         <MdLocationPin size={20} />
