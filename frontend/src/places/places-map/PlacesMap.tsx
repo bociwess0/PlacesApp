@@ -12,72 +12,32 @@ export default function PlacesMap({ place, onClose }: Props) {
     <>
       {/* Overlay */}
       <div
-        className="
-          fixed inset-0
-          z-50
-          bg-black/70
-          backdrop-blur-sm
-        "
+        className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm"
         onClick={onClose}
       />
 
       {/* Modal */}
       <div
-        className="
-              fixed
-    left-1/2
-    top-1/2
-    z-50
-
-    w-[95vw]
-    max-w-6xl
-
-    max-h-[90vh]
-
-    -translate-x-1/2
-    -translate-y-1/2
-
-    overflow-y-auto
-
-    rounded-3xl
-    border border-[#1D3A5F]
-    bg-[#06152B]
-
-    shadow-2xl
-        "
+        className="fixed left-1/2 top-1/2 z-50  w-[95vw] max-w-6xl  max-h-[90vh] -translate-x-1/2 -translate-y-1/2 overflow-y-auto
+                rounded-3xl border border-[#1D3A5F] bg-[#06152B] shadow-2xl"
       >
         {/* Header */}
         <div
-          className="
-            flex items-center justify-between
-            border-b border-[#1D3A5F]
-            p-6
-          "
+          className=" flex items-center justify-between border-b border-[#1D3A5F] p-6"
         >
           <h2 className="text-3xl font-bold text-white">{place.title}</h2>
 
           <button
             onClick={onClose}
-            className="
-              text-slate-400
-              transition
-              hover:text-white
-            "
+            className=" text-slate-400 transition hover:text-white "
           >
             <X size={28} />
           </button>
         </div>
 
-        {/* Content */}
         <div
-          className="
-            flex flex-col gap-6
-            p-6
-
-            lg:flex-row
-          "
+          className="flex flex-col gap-6 p-6 lg:flex-row"
         >
-          {/* Left */}
           <div className="lg:w-1/3">
             <img
               src={place.image}
