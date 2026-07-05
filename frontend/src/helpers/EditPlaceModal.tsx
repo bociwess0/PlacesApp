@@ -43,12 +43,11 @@ export default function EditPlaceModal({
         try {
             const response = await updatePlace(place._id, data);
 
+            console.log(response.data.place);
+
             if (response.ok) {
                 dispatch(
-                    updatePlaceItem({
-                        placeId: place._id,
-                        ...data,
-                    }),
+                    updatePlaceItem({place: response.data.place}),
                 );
 
                 dispatch(

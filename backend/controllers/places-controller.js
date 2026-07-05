@@ -121,49 +121,67 @@ const createPlace = async (req, res, next) => {
 
   res.status(201).json({ place: createdPlace });
 };
-
 const updatePlace = async (req, res, next) => {
-  console.log("PATCH HIT");
-
   const errors = validationResult(req);
+
   if (!errors.isEmpty()) {
     return next(
-      new HttpError("Invalid inputs passed, please check your data.", 422),
+      new HttpError(
+        "Invalid inputs passed, please check your data.",
+        422,
+      ),
     );
   }
 
-  const { title, description, image, address } = req.body;
+  const { title, description, address, image } = req.body;
   const placeId = req.params.pid;
 
   let place;
+
   try {
     place = await Place.findById(placeId);
   } catch (err) {
-    const error = new HttpError(
-      "Something went wrong, could not update place.",
-      500,
+    return next(
+      new HttpError(
+        "Something went wrong, could not update place.",
+        500,
+      ),
     );
-    return next(error);
   }
+
+  if (!place) {
+    return next(
+      new HttpError(
+        "Could not find place for the provided id.",
+        404,
+      ),
+    );
+  }
+
+  let coordinates = await getCoordsForAddress(address);
 
   place.title = title;
   place.description = description;
   place.address = address;
   place.image = image;
-
+  place.location = coordinates;
 
   try {
     await place.save();
   } catch (err) {
-    const error = new HttpError(
-      "Something went wrong, could not update place.",
-      500,
+    return next(
+      new HttpError(
+        "Something went wrong, could not update place.",
+        500,
+      ),
     );
-    return next(error);
   }
 
-  res.status(200).json({ place: place.toObject({ getters: true }) });
+  res.status(200).json({
+    place: place.toObject({ getters: true }),
+  });
 };
+
 
 const deletePlace = async (req, res, next) => {
   const placeId = req.params.pid;

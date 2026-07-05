@@ -26,23 +26,13 @@ const placesSlice = createSlice({
         (place: Place) => place._id != action.payload.placeId,
       );
     },
-    updatePlaceItem: (
-      state,
-      action: PayloadAction<{
-        placeId: string;
-        title: string;
-        description: string;
-        address: string;
-        image: string;
-      }>,
-    ) => {
-      const place = state.places.find((p) => p._id === action.payload.placeId);
+    updatePlaceItem: (state, action: PayloadAction<{ place: Place }>) => {
+      const placeIndex = state.places.findIndex(
+        (place) => place._id === action.payload.place._id,
+      );
 
-      if (place) {
-        place.title = action.payload.title;
-        place.description = action.payload.description;
-        place.address = action.payload.address;
-        place.image = action.payload.image;
+      if (placeIndex !== -1) {
+        state.places[placeIndex] = action.payload.place;
       }
     },
   },
