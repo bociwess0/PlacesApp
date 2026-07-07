@@ -4,6 +4,9 @@ import App from "./App.tsx";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "./store/store.ts";
+import { setupApiInterceptors } from "./auth/api/setupApiInterceptors.ts";
+
+setupApiInterceptors();
 
 createRoot(document.getElementById("root")!).render(
   <Provider store={store}>

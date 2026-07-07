@@ -200,7 +200,7 @@ export default function EditPlaceModal({
                                 image,
                             })}
                             disabled={isLoading}
-                            className="flex cursor-pointer items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white transition bg-blue-600 hover:shadow-lg hover:shadow-blue-500/30 disabled:cursor-not-allowed disabled:opacity-50"
+                            className="flex cursor-pointer items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white transition hover:shadow-lg hover:shadow-blue-500/30 disabled:cursor-not-allowed disabled:opacity-50"
                         >
                             {isLoading ? (
                                 <div className="h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent" />
