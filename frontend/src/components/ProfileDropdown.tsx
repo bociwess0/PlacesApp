@@ -5,6 +5,7 @@ import {
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ConfirmModal from "../helpers/ConfirmModal";
 
 interface UserData {
   name: string;
@@ -17,6 +18,8 @@ export default function ProfileDropdown() {
   const [isOpen, setIsOpen] = useState(false);
 
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
+
 
   const navigate = useNavigate();
 
@@ -72,9 +75,8 @@ export default function ProfileDropdown() {
 
         <ChevronDown
           size={18}
-          className={`text-slate-400 transition-transform duration-200 ${
-            isOpen ? "rotate-180" : ""
-          }`}
+          className={`text-slate-400 transition-transform duration-200 ${isOpen ? "rotate-180" : ""
+            }`}
         />
       </button>
 
@@ -112,7 +114,7 @@ export default function ProfileDropdown() {
           <div className="border-t border-[#1D3A5F] p-2">
             <button
               type="button"
-              onClick={handleLogout}
+              onClick={() => setShowLogoutModal(true)}
               className="flex w-full cursor-pointer items-center gap-3 rounded-xl px-4 py-3 text-left text-red-400 transition hover:bg-red-500/10"
             >
               <LogOut size={20} />
@@ -120,6 +122,16 @@ export default function ProfileDropdown() {
             </button>
           </div>
         </div>
+      )}
+      {showLogoutModal && (
+        <ConfirmModal
+          title="Logout"
+          message="Are you sure you want to logout?"
+          confirmText="Logout"
+          variant="danger"
+          onConfirm={handleLogout}
+          onClose={() => setShowLogoutModal(false)}
+        />
       )}
     </div>
   );
