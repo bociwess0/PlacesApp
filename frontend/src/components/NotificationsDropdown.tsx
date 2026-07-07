@@ -11,6 +11,12 @@ import type { RootState } from "../store/store";
 import { markAllNotificationsAsRead, markNotificationAsRead, type NotificationType } from "../store/notificationSlice";
 import { formatNotificationTime } from "../utils/util-actions";
 
+interface UserData {
+    name: string;
+    email: string;
+    token: string;
+    userId: string;
+}
 
 export default function NotificationsDropdown() {
     const [isOpen, setIsOpen] = useState(false);
@@ -87,6 +93,14 @@ export default function NotificationsDropdown() {
             </div>
         );
     };
+
+    const user: UserData | null = JSON.parse(
+        localStorage.getItem("userData") ?? "null",
+    );
+
+    if (!user) {
+        return null;
+    }
 
     return (
         <div ref={dropdownRef} className="relative">
