@@ -5,9 +5,9 @@ export default function AuthRequired() {
   const navigate = useNavigate();
 
   return (
-    <div className="flex min-h-[calc(100vh-160px)] px-0 md:px-5">
-      <div className="relative w-full max-w-2xl overflow-hidden rounded-3xl border border-[#1D3A5F] bg-slate-950/40 p-4 md:p-12">
-        <div className="absolute left-1/2 top-0 h-64 w-64 -translate-x-1/2 rounded-full bg-blue-600/20 blur-3xl" />
+    <div className="flex md:min-h-[calc(100vh-160px)] px-0 md:px-5">
+      <div className="relative w-full max-w-2xl overflow-hidden rounded-3xl md:border md:border-[#1D3A5F] md:bg-slate-950/40 p-4 md:p-12">
+        <div className="absolute left-1/2 top-0 h-64 w-64 -translate-x-1/2 rounded-full md:bg-blue-600/20 blur-3xl" />
 
         <div className="relative z-10">
           <div className="flex justify-center">

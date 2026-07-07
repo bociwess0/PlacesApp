@@ -31,7 +31,7 @@ export default function AddPlaceForm() {
     setSuccess("");
 
     try {
-      const place:Place = await createPlace({
+      const place: Place = await createPlace({
         title,
         description,
         address,
@@ -39,7 +39,7 @@ export default function AddPlaceForm() {
       });
 
       console.log(place);
-      
+
 
       setTitle("");
       setDescription("");
@@ -78,6 +78,7 @@ export default function AddPlaceForm() {
   return (
     <div className="w-full max-w-5xl">
       <div className="pb-5">
+        <h1 className="text-3xl font-bold text-white md:text-4xl">Add Place</h1>
         <p className="mt-2 text-slate-400">
           Create a new destination and share your favorite places around the
           world.
@@ -187,7 +188,7 @@ export default function AddPlaceForm() {
           <button
             type="submit"
             disabled={loading}
-            className="flex cursor-pointer items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white transition bg-blue-600 hover:shadow-lg hover:shadow-blue-500/30 disabled:cursor-not-allowed disabled:opacity-50"
+            className="flex cursor-pointer items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white transition hover:shadow-lg hover:shadow-blue-500/30 disabled:cursor-not-allowed disabled:opacity-50"
           >
             <PlusCircle size={18} />
             <span>{loading ? "Creating..." : "Add Place"}</span>

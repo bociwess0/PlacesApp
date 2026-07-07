@@ -17,7 +17,7 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }: Props) {
   );
   const places = useSelector((state: RootState) => state.placesAction.places);
 
-  const sidebarTop = places && places.length > 0 ? "top-35" : "top-18";
+  const sidebarTop = places && places.length > 0 ? "top-35" : "top-25";
   const sidebarHeight = places && places.length > 0 ? "h-[calc(100vh-140px)]" : "h-[calc(100vh-70px)]";
 
   const [showLogoutModal, setShowLogoutModal] = useState(false);
