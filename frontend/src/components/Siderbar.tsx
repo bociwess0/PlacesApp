@@ -1,33 +1,18 @@
-import { MapPinned, PlusCircle, LogOut } from "lucide-react";
-import { useState, type Dispatch, type SetStateAction } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { MapPinned, PlusCircle } from "lucide-react";
+import { type Dispatch, type SetStateAction } from "react";
 import { NavLink } from "react-router-dom";
-import type { RootState } from "../store/store";
-import { logoutUser } from "../store/userSlice";
-import ConfirmModal from "../helpers/ConfirmModal";
 
 interface Props {
   isSidebarOpen: boolean;
   setIsSidebarOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }: Props) {
-  const isAuthenticated = useSelector(
-    (state: RootState) => state.userActions.isAuthenticated,
-  );
-  const places = useSelector((state: RootState) => state.placesAction.places);
+export default function Sidebar({
+  isSidebarOpen,
+  setIsSidebarOpen,
+}: Props) {
+  
 
-  const sidebarTop = places && places.length > 0 ? "top-36" : "top-22";
-  const sidebarHeight = places && places.length > 0 ? "h-[calc(100vh-140px)]" : "h-[calc(100vh-70px)]";
-
-  const [showLogoutModal, setShowLogoutModal] = useState(false);
-
-  const dispatch = useDispatch();
-
-  const handleLogout = () => {
-    dispatch(logoutUser());
-    localStorage.removeItem("userData");
-  };
 
   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
     `flex items-center gap-3 rounded-xl px-4 py-3 transition ${
@@ -38,9 +23,9 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }: Props) {
 
   return (
     <div
-      className={`fixed left-0 ${sidebarTop} md:top-30 z-50 flex ${sidebarHeight} w-64 flex-col border-r border-[#1D3A5F] bg-slate-950 transition-transform duration-300 ease-in-out md:h-[calc(100vh-100px)] ${
+      className={`absolute left-0 top-0 z-40 flex h-[calc(100dvh-100%)] min-h-[calc(100dvh-80px)] w-64 flex-col border-r border-[#1D3A5F] bg-slate-950 shadow-2xl transition-transform duration-300 ease-in-out lg:static lg:h-auto lg:min-h-[calc(100vh-100px)] lg:w-1/7 lg:shrink-0 lg:translate-x-0 lg:shadow-none ${
         isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-      } lg:static lg:w-1/7 lg:translate-x-0`}
+      }`}
     >
       <nav className="flex flex-1 flex-col gap-2 p-4">
         <NavLink
@@ -62,28 +47,6 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }: Props) {
         </NavLink>
       </nav>
 
-      {isAuthenticated && (
-        <div className="border-t border-[#1D3A5F] p-4">
-          <button
-            onClick={() => setShowLogoutModal(true)}
-            className="flex w-full cursor-pointer items-center gap-3 rounded-xl px-4 py-3 text-red-400 transition hover:bg-red-500/10"
-          >
-            <LogOut size={20} />
-            <span>Logout</span>
-          </button>
-        </div>
-      )}
-
-      {showLogoutModal && (
-        <ConfirmModal
-          title="Logout"
-          message="Are you sure you want to logout?"
-          confirmText="Logout"
-          variant="danger"
-          onConfirm={handleLogout}
-          onClose={() => setShowLogoutModal(false)}
-        />
-      )}
     </div>
   );
 }
