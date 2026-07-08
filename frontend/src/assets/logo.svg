@@ -1,6 +1,6 @@
 <svg
-        width="300"
-        height="120"
+        width="200"
+        height="60"
         viewBox="0 0 380 120"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -15,7 +15,7 @@
         <rect width="420" height="120"/>
 
         <text
-          x="20"
+          x="10"
           y="78"
           font-family="Inter, Arial, sans-serif"
           font-size="56"

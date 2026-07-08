@@ -18,7 +18,7 @@ export default function Header({ isSidebarOpen, setIsSidebarOpen }: Props) {
 
   return (
     <header className="sticky top-0 z-50 border-b border-[#1D3A5F] bg-[#06152B]">
-      <div className="px-6 py-4 md:py-4 md:px-8">
+      <div className="px-4 py-4 md:py-4 md:px-8">
         {/* Mobile Header */}
         <div className="flex w-full items-center justify-between gap-2 md:hidden">
           <button
@@ -49,7 +49,7 @@ export default function Header({ isSidebarOpen, setIsSidebarOpen }: Props) {
 
         <div className="hidden items-center justify-between md:flex">
           <NavLink to={"/"}>
-            <img src={logo} alt="YourPlaces Logo" className="h-18" />
+            <img src={logo} alt="YourPlaces Logo" className="h-15" />
           </NavLink>
 
           <div className="flex items-center gap-8">
