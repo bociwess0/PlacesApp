@@ -1,25 +1,32 @@
-import { useEffect } from "react";
-import PlacesList from "../places/all-places/PlacesList";
-import { getPlacesById } from "../auth/api/services/places";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import type { RootState } from "../store/store";
 import AuthRequired from "../auth/components/AuthRequired";
-import { loginUser } from "../store/userSlice";
-import { setPlaces } from "../store/placesSlice";
 import NoPlacesFound from "../auth/components/NoPlacesFound";
+import { getPlacesById } from "../auth/api/services/places";
+import PlacesList from "../places/all-places/PlacesList";
+import { setPlaces } from "../store/placesSlice";
+import type { RootState } from "../store/store";
+import { loginUser } from "../store/userSlice";
+import LoadingPlaceholder from "../components/LoadingPlaceholder";
 
 export default function Places() {
+  const [isLoading, setIsLoading] = useState(false);
+
   const isAuthenticated = useSelector(
     (state: RootState) => state.userActions.isAuthenticated,
   );
-  const places = useSelector((state: RootState) => state.placesAction.places);
+
+  const places = useSelector(
+    (state: RootState) => state.placesAction.places,
+  );
+
   const searchTerm = useSelector(
     (state: RootState) => state.placesAction.searchTerm,
   );
 
   const dispatch = useDispatch();
 
-  const term = searchTerm.toLowerCase();
+  const term = searchTerm.toLowerCase().trim();
 
   const filteredPlaces = places.filter(
     (place) =>
@@ -28,39 +35,61 @@ export default function Places() {
   );
 
   useEffect(() => {
-    async function getPlacesByUserId(uid: string) {
-      const fetchedPlaces = await getPlacesById(uid);
-      dispatch(setPlaces({ places: fetchedPlaces }));
-    }
-
     const user: {
       userId: string;
       token: string;
       name: string;
       email: string;
-    } | null = JSON.parse(localStorage.getItem("userData") ?? "null");
+    } | null = JSON.parse(
+      localStorage.getItem("userData") ?? "null",
+    );
 
-    if (user) {
-      dispatch(
-        loginUser({
-          userId: user.userId,
-          token: user.token,
-          name: user.name,
-          email: user.email,
-        }),
-      );
-      getPlacesByUserId(user.userId);
-    }
+    if (!user) return;
+
+    dispatch(
+      loginUser({
+        userId: user.userId,
+        token: user.token,
+        name: user.name,
+        email: user.email,
+      }),
+    );
+
+    const fetchPlaces = async () => {
+      setIsLoading(true);
+
+      try {
+        const fetchedPlaces = await getPlacesById(user.userId);
+
+        dispatch(
+          setPlaces({
+            places: fetchedPlaces,
+          }),
+        );
+      } catch (error) {
+        console.log("Failed to fetch places.", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchPlaces();
   }, [dispatch]);
 
   if (!isAuthenticated) {
     return <AuthRequired />;
   }
 
+  if (isLoading) {
+    return <LoadingPlaceholder />
+  }
+
   if (filteredPlaces.length === 0) {
     return (
       <>
-        <h1 className="text-5xl font-bold text-white">Places</h1>
+        <h1 className="text-3xl font-bold text-white md:text-5xl">
+          Places
+        </h1>
 
         <NoPlacesFound />
       </>
@@ -69,10 +98,11 @@ export default function Places() {
 
   return (
     <div>
-      <h1 className="text-3xl md:text-5xl font-bold text-white">Places</h1>
-      {filteredPlaces && filteredPlaces.length > 0 && (
-        <PlacesList places={filteredPlaces} />
-      )}
+      <h1 className="text-3xl font-bold text-white md:text-5xl">
+        Places
+      </h1>
+
+      <PlacesList places={filteredPlaces} />
     </div>
   );
 }
